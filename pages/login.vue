@@ -2,6 +2,7 @@
 	<div class="col-md-4 mt-2 mt-md-5 mx-auto">
 		<h2 class="text-center">User Login</h2>
 		<form @submit.prevent="submit">
+			<div v-if="errors.message" class="alert alert-danger">{{ errors.message }}</div>
 			<div class="form-group">
 				<label>Email address</label>
 				<input v-model.trim="form.email" type="email" name="email" class="form-control" placeholder="Enter email">
@@ -35,9 +36,13 @@ export default {
 	},
 	methods: {
 		async submit() {
-			await this.$auth.loginWith('local', {
-			  data: this.form
-			})
+			try{
+				await this.$auth.loginWith('local', {
+			  		data: this.form
+				})
+			 }catch(e){
+			    return;
+			 }
 
 		}
 	}

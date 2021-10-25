@@ -62,6 +62,7 @@ export default {
 				//can like your own post
 				if (userFromVuex.id === post.user.id) {
 					alert('You cant like your own post');
+					return;
 				}
 				// if user have already liked
 				if (post.users) {

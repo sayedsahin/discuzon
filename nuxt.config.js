@@ -1,7 +1,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
+  // ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-front',
@@ -78,7 +78,7 @@ export default {
         },
         endpoints: {
           login: { url: '/login', method: 'post'},
-          logout: { url: '/register', method: 'post' },
+          register: { url: '/register', method: 'post' },
           logout: { url: '/logout', method: 'post' },
           user: { url: '/user', method: 'get'}
         }

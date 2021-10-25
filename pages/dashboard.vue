@@ -8,7 +8,7 @@
 				<small class="form-text text-danger" v-if="errors.title">{{ errors.title[0] }}</small>
 			</div>
 			<div class="form-group">
-				<label>Password</label>
+				<label>Topic Body</label>
 				<textarea v-model.trim="form.body" name="body" class="form-control" placeholder="Write this..." rows="5"></textarea>
 				<small class="form-text text-danger" v-if="errors.body">{{ errors.body[0] }}</small>
 			</div>
@@ -30,8 +30,12 @@ export default {
 	},
 	methods: {
 		async create() {
-			await this.$axios.$post('topics', this.form);
-			this.$router.push('/');
+			try{
+				await this.$axios.$post('topics', this.form);
+				this.$router.push('/');
+			}catch(e){
+				// Error
+			}
 		}
 	}
 }

@@ -11,6 +11,9 @@ export const getters = {
 export const mutations = {
 	SET_VALIDATION_ERRORS(state, errors){
 		state.errors = errors;
+	},
+	SET_LOGIN_ERRORS(state, errors){
+		state.errors = errors;
 	}
 };
 
@@ -20,5 +23,8 @@ export const actions = {
 	},
 	clearErrors({commit}, errors) {
 		commit('SET_VALIDATION_ERRORS', {})
-	}
+	},
+	setLoginErrors({commit}, errors) {
+		commit('SET_LOGIN_ERRORS', errors);
+	},
 };
