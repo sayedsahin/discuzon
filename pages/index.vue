@@ -1,21 +1,73 @@
 <template>
-  <div class="container">
-     <main role="main">
-
-      <div class="m-auto px-5 py-3 text-center">
-        <h1>Laravel Nuxt Project</h1>
-        <p class="lead">Complete Video Series Nuxt With Laravel. I Really Excited This Series.</p>
-        <div>
-          <nuxt-link to="/topics" class="btn btn-warning btn-lg">See Topics</nuxt-link>
+  <div>
+    <main id="tt-pageContent" class="tt-offset-small">
+      <div class="container">
+        <div class="tt-topic-list">
+          <div class="tt-list-header">
+            <div class="tt-col-topic">Topic</div>
+            <div class="tt-col-category">Category</div>
+            <div class="tt-col-value hide-mobile">Likes</div>
+            <div class="tt-col-value hide-mobile">Replies</div>
+            <div class="tt-col-value hide-mobile">Views</div>
+            <div class="tt-col-value">Activity</div>
+          </div>
+          <div class="tt-topic-alert tt-alert-default" role="alert">
+            <a href="#" target="_blank">4 new posts</a> are added recently, click here to load them.
+          </div>
+          <div class="tt-item tt-itemselect">
+            <div class="tt-col-avatar">
+              <svg class="tt-icon">
+                <use xlink:href="#icon-ava-k"></use>
+              </svg>
+            </div>
+            <div class="tt-col-description">
+              <h6 class="tt-title"><a href="page-single-topic.html">
+                <svg class="tt-icon">
+                  <use xlink:href="#icon-pinned"></use>
+                </svg>
+                Eid Costume Contest 2018
+              </a></h6>
+              <div class="row align-items-center no-gutters">
+                <div class="col-11">
+                  <ul class="tt-list-badge">
+                    <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
+                    <li><a href="#"><span class="tt-badge">contests</span></a></li>
+                    <li><a href="#"><span class="tt-badge">authors</span></a></li>
+                  </ul>
+                </div>
+                <div class="col-1 ml-auto show-mobile">
+                  <div class="tt-value">1h</div>
+                </div>
+              </div>
+            </div>
+            <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
+            <div class="tt-col-value hide-mobile">985</div>
+            <div class="tt-col-value tt-color-select hide-mobile">502</div>
+            <div class="tt-col-value hide-mobile">15.1k</div>
+            <div class="tt-col-value hide-mobile">1h</div>
+          </div>
+          <Topics v-for="topic in topics" :key="topic.id" :topic="topic" />
         </div>
       </div>
-
     </main>
   </div>
 </template>
 
 <script>
 export default {
-  // middleware: ['auth']
+  data() {
+    return {
+      topics: [],
+      links: []
+    }
+  },
+  async asyncData({$axios}) {
+    let {data, links} = await $axios.$get('/topic');
+    return {
+      topics: data,
+      links: links
+    }
+
+  },
 }
 </script>

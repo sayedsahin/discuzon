@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container mt-5">
 		<div class="jumbotron">
 			<h4 class="display-4">{{ topic.title }}</h4>
 			<p class="text-secondary">{{topic.created_at}} by {{topic.user.name}}</p>
@@ -36,24 +36,24 @@ export default {
 		}
 	},
 	async asyncData({$axios, params}){
-		const {data} = await $axios.$get(`/topics/${params.id}`)
+		const {data} = await $axios.$get(`/topic/${params.id}`)
 		return {
 			topic: data
 		}
 	},
 	methods: {
 		async create (id) {
-			await this.$axios.$post(`/topics/${this.$route.params.id}/posts`, {
+			await this.$axios.$post(`/topic/${this.$route.params.id}/posts`, {
 				body: this.body
 			})
-			// this.$router.push('/topics');
-			const {data} = await this.$axios.$get(`/topics/${id}`)
+			// this.$router.push('/topic');
+			const {data} = await this.$axios.$get(`/topic/${id}`)
 			this.topic = data
 		},
 		async deletePost (topicid, id) {
-			await this.$axios.$delete(`/topics/${this.$route.params.id}/posts/${id}`)
-	    	// this.$router.push(`/topics`)
-	    	const {data} = await this.$axios.$get(`/topics/${topicid}`)
+			await this.$axios.$delete(`/topic/${this.$route.params.id}/posts/${id}`)
+	    	// this.$router.push(`/topic`)
+	    	const {data} = await this.$axios.$get(`/topic/${topicid}`)
 			this.topic = data
 		},
 		async likePost(topicid, post) {
@@ -69,8 +69,8 @@ export default {
 					if (post.users.some(user=> user.id === userFromVuex.id)) {
 						alert('you have already liked this post')
 					}else{
-						await this.$axios.$post(`/topics/${topicid}/posts/${post.id}/likes`)
-						const {data} = await this.$axios.$get(`/topics/${topicid}`)
+						await this.$axios.$post(`/topic/${topicid}/posts/${post.id}/likes`)
+						const {data} = await this.$axios.$get(`/topic/${topicid}`)
 						this.topic = data
 					}
 				}

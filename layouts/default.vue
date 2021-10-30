@@ -1,23 +1,7 @@
 <template>
 	<div>
-		<Navbar />
+		<Header />
 		<Nuxt />
+		<Footer />
 	</div>
 </template>
-
-<script>
-import Navbar from "../components/Navbar";
-export default {
-	components: {Navbar},
-	name: 'default',
-
-  data () {
-    return {
-
-    }
-  }
-}
-</script>
-
-<style lang="css" scoped>
-</style>

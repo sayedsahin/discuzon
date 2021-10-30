@@ -34,7 +34,7 @@ export default {
 		}
 	},
 	async asyncData({$axios}) {
-		let {data, links} = await $axios.$get('/topics');
+		let {data, links} = await $axios.$get('/topic');
 		return {
 			topics: data,
 			links: links
@@ -47,7 +47,7 @@ export default {
 	    return this.topics = {...this.topics, ...data}
 	  },
 	  async deleteTopic (id) {
-	    await this.$axios.$delete(`/topics/${id}`)
+	    await this.$axios.$delete(`/topic/${id}`)
 	    this.$router.push('/')
 	  }
 	}

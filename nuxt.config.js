@@ -1,7 +1,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-  // ssr: false,
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-front',
@@ -15,8 +15,13 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: '/css/w3.css' },
+      { rel: 'stylesheet', href: '/css/style.min.css' },
+    ],
+    script: [
+      // { src: "/js/bundle.min.js", type: "text/javascript"}
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -47,7 +52,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    'bootstrap-vue/nuxt',
   ],
   axios: {
     credentials: true,

@@ -31,7 +31,7 @@ export default {
 	methods: {
 		async create() {
 			try{
-				await this.$axios.$post('topics', this.form);
+				await this.$axios.$post('topic', this.form);
 				this.$router.push('/');
 			}catch(e){
 				// Error

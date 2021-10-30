@@ -1,26 +1,86 @@
 <template>
-	<div class="col-md-4 mt-2 mt-md-5 mx-auto">
-		<h2 class="text-center">User Login</h2>
-		<form @submit.prevent="submit">
-			<div v-if="errors.message" class="alert alert-danger">{{ errors.message }}</div>
-			<div class="form-group">
-				<label>Email address</label>
-				<input v-model.trim="form.email" type="email" name="email" class="form-control" placeholder="Enter email">
-				<small class="form-text text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
-			</div>
-			<div class="form-group">
-				<label>Password</label>
-				<input v-model.trim="form.password" type="password" name="password" class="form-control" placeholder="Password">
-				<small class="form-text text-danger" v-if="errors.password">{{ errors.password[0] }}</small>
-			</div>
-			<div class="form-check mb-1">
-				<input type="checkbox" class="form-check-input">
-				<label class="form-check-label">Remember Me</label>
-			</div>
-			<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-		</form>
-		<!-- <a href="#" @click.prevent="submit">Click</a> -->
-	</div>
+	<main id="tt-pageContent" class="tt-offset-none mt-5">
+	    <div class="container">
+	        <div class="tt-loginpages-wrapper">
+	            <div class="tt-loginpages">
+	                <nuxt-link to="/" class="tt-block-title">
+	                    <img src="/favicon.ico" width="80px">
+	                    <div class="tt-title">
+	                        Welcome to Forum19
+	                    </div>
+	                    <div class="tt-description">
+	                       Log into your account to unlock true power of community.
+	                    </div>
+	                </nuxt-link>
+	                <form @submit.prevent="submit" class="form-default">
+	                	<div v-if="errors.message" class="w3-panel w3-pale-red w3-border w3-round">Incorrect email Or password.</div>
+	                    <div class="form-group">
+	                        <label for="loginUserName">Email</label>
+	                        <input v-model.trim="form.email" type="email" name="email" class="form-control" id="loginUserName" placeholder="email@example.com">
+	                        <small class="w3-red" v-if="errors.email">{{ errors.email[0] }}</small>
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="loginUserPassword">Password</label>
+	                        <input v-model.trim="form.password" type="password" name="password" class="form-control" id="loginUserPassword" placeholder="************">
+	                        <small class="w3-red" v-if="errors.password">{{ errors.password[0] }}</small>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col">
+	                            <div class="form-group">
+	                                <div class="checkbox-group">
+	                                    <input type="checkbox" id="settingsCheckBox01" name="checkbox">
+	                                    <label for="settingsCheckBox01">
+	                                        <span class="check"></span>
+	                                        <span class="box"></span>
+	                                        <span class="tt-text">Remember me</span>
+	                                    </label>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="col ml-auto text-right">
+	                            <a href="#" class="tt-underline">Forgot Password</a>
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <button type="submit" class="btn btn-secondary btn-block">Log in</button>
+	                    </div>
+	                    <p>Or login with social network</p>
+	                    <div class="row">
+	                        <div class="col">
+	                            <div class="form-group">
+	                                <a href="#" class="btn btn-color01 btn-secondary btn-block">
+	                                    <i>
+	                                        <svg class="icon">
+	                                          <use xlink:href="#facebook-f-brands"></use>
+	                                        </svg>
+	                                    </i>
+	                                    Facebook
+	                                </a>
+	                            </div>
+	                        </div>
+	                        <div class="col">
+	                            <div class="form-group">
+	                                <a href="#" class="btn btn-color02 btn-block">
+	                                    <i>
+	                                        <svg class="icon">
+	                                          <use xlink:href="#twitter-brands"></use>
+	                                        </svg>
+	                                    </i>
+	                                    Twitter
+	                                </a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <p>Don’t have an account? <nuxt-link to="/register" class="tt-underline">Signup here</nuxt-link></p>
+	                    <div class="tt-notes">
+	                        By Logging in, signing in or continuing, I agree to
+	                        Forum19’s <a href="#" class="tt-underline">Terms of Use</a> and <a href="#" class="tt-underline">Privacy Policy.</a>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+	</main>
 </template>
 
 <script>
