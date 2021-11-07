@@ -16,7 +16,7 @@
 		<nav>
 			<ul class="pagination justify-content-center">
 				<li v-for="(key, value) in links">
-					<a @click="loadMore(key)" href="#" class="page-link">{{value}}</a>
+					<a @click.prevent="loadMore(key)" href="#" class="page-link">{{value}}</a>
 				</li>
 			</ul>
 		</nav>

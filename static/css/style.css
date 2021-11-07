@@ -2391,7 +2391,7 @@ hr {
     .tt-single-topic:not(.tt-small-indent) + .tt-icon-btn {
       margin-left: 18px; }
     .tt-single-topic .tt-text {
-      display: none; } }
+      /*display: none;*/ } }
 
 .tt-info-box {
   background-color: #ffffff; }

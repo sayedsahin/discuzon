@@ -1,20 +1,23 @@
 <template>
   <div>
-    <nav class="panel-menu" id="mobile-menu">
-      <ul>
-      </ul>
-      <div class="mm-navbtn-names">
-        <div class="mm-closebtn">
-          Close
-          <div class="tt-icon">
-            <svg>
-              <use xlink:href="#icon-cancel"></use>
-            </svg>
+    <client-only>
+      <!-- Client only nav not working ssr:true. should be fix error  -->
+      <nav class="panel-menu" id="mobile-menu">
+        <ul>
+        </ul>
+        <div class="mm-navbtn-names">
+          <div class="mm-closebtn">
+            Close
+            <div class="tt-icon">
+              <svg>
+                <use xlink:href="#icon-cancel"></use>
+              </svg>
+            </div>
           </div>
+          <div class="mm-backbtn">Back</div>
         </div>
-        <div class="mm-backbtn">Back</div>
-      </div>
-    </nav>
+      </nav>
+    </client-only>
     <header id="tt-header">
       <div class="container">
         <div class="row tt-row no-gutters">

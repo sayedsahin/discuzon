@@ -16,18 +16,18 @@
 	                	<div v-if="errors.message" class="w3-panel w3-pale-red w3-border w3-round">Incorrect email Or password.</div>
 	                    <div class="form-group">
 	                        <label for="loginUserName">Email</label>
-	                        <input v-model.trim="form.email" type="email" name="email" class="form-control" id="loginUserName" placeholder="email@example.com">
+	                        <input v-model.trim="form.email" type="email" name="email" class="form-control" id="loginUserName" placeholder="email@example.com" autocomplete="email">
 	                        <small class="w3-red" v-if="errors.email">{{ errors.email[0] }}</small>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="loginUserPassword">Password</label>
-	                        <input v-model.trim="form.password" type="password" name="password" class="form-control" id="loginUserPassword" placeholder="************">
+	                        <input v-model.trim="form.password" type="password" name="password" class="form-control" id="loginUserPassword" placeholder="************" autocomplete="current-password">
 	                        <small class="w3-red" v-if="errors.password">{{ errors.password[0] }}</small>
 	                    </div>
 	                    <div class="row">
 	                        <div class="col">
 	                            <div class="form-group">
-	                                <div class="checkbox-group">
+	                                <div class="">
 	                                    <input type="checkbox" id="settingsCheckBox01" name="checkbox">
 	                                    <label for="settingsCheckBox01">
 	                                        <span class="check"></span>
@@ -100,6 +100,7 @@ export default {
 				await this.$auth.loginWith('local', {
 			  		data: this.form
 				})
+				this.$router.back()
 			 }catch(e){
 			    return;
 			 }

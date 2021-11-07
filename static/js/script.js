@@ -1613,7 +1613,8 @@ module.exports = function (element) {
 /*
 	Button switching
 */
-(function(){
+// Comment by Sayed sahin
+/*(function(){
 	var ttJsActiveBtn= $('#tt-pageContent .tt-js-active-btn');
 	if (ttJsActiveBtn.length){
 		ttJsActiveBtn.on('click', '.tt-button-icon', function(e){
@@ -1622,7 +1623,8 @@ module.exports = function (element) {
 			return false;
 		});
 	};
-})();
+})();*/
+
 /*
  Desktop Menu
 */
