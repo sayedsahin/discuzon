@@ -21,6 +21,10 @@
         </div>
 
         <Reaction :reaction="reply.reaction" :reacted="reply.reacted" :id="reply.id" :section="'reply'"/>
+        <div class="f-right" v-if="reply.user.id === $auth.user.id">
+          <nuxt-link :to="`/reply/${reply.id}/edit`" class="ed">Edit</nuxt-link>
+          <a href="" class="ed">Delete</a>
+        </div>
       </div>
     </div>
   </div>
@@ -56,8 +60,7 @@ export default {
 
   data () {
     return {
-      older: ''
-
+      older: '',
     }
   }, 
   /*computed: {
@@ -76,3 +79,6 @@ export default {
   }
 }
 </script>
+<style lang="css">
+  .ed {color: #666f74; font-size: 14px;}
+</style>

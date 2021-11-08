@@ -96,6 +96,7 @@
           <a @click.prevent="createReply()" href="#" class="btn btn-secondary btn-width-lg">Reply</a>
         </div>
       </div>
+      <div v-if="success" class="fixed-bottom w3-panel w3-green p-2 w3-round" style="">{{success}}</div>
     </div>
   </div>
 </template>
@@ -106,6 +107,7 @@ export default {
   data () {
     return {
       body: '',
+      success: false,
     }
   },
 
@@ -117,6 +119,8 @@ export default {
 				});
 				this.$emit('Replies', data.data);
 				this.body = '';
+        this.success = 'Updated Successful'
+        setTimeout(() => this.success = false, 5000)
     	}catch(e){
     	   return;
     	}
