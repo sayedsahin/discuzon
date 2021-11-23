@@ -132,5 +132,4 @@ export default {
 </script>
 
 <style lang="css">
-  .fixed-bottom{position: fixed; left: 10px; bottom: 5px;}
 </style>

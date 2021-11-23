@@ -2,9 +2,9 @@
 	<div class="mt-2 mt-md-5 container">
 		<h2 class="text-center">Letest Topic</h2>
 		<div v-for="(topic, index) in topics" :key="index" class="jumbotron">
-			<h4 class="display-4"><nuxt-link :to="{name: 'topics-id', params: {id: topic.id}}">{{ topic.title }}</nuxt-link></h4>
+			<h4 class="display-4"><NuxtLink :to="{name: 'topics-id', params: {id: topic.id}}">{{ topic.title }}</NuxtLink></h4>
 			<div v-if="user.id === topic.user.id" class="float-right">
-				<nuxt-link :to="{name: 'topics-edit', params: {id: topic.id}}" class="btn btn-outline-dark btn-sm">Edit</nuxt-link>
+				<NuxtLink :to="{name: 'topics-edit', params: {id: topic.id}}" class="btn btn-outline-dark btn-sm">Edit</NuxtLink>
 				<button @click="deleteTopic(topic.id)" class="btn btn-danger btn-sm">Delete</button>
 			</div>
 			<p class="text-secondary">{{topic.created_at}} by {{topic.user.name}}</p>

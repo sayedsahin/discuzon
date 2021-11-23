@@ -119,7 +119,7 @@ export default {
 				});
 				this.$emit('Replies', data.data);
 				this.body = '';
-        this.success = 'Updated Successful'
+        this.success = 'Reply successful created'
         setTimeout(() => this.success = false, 5000)
     	}catch(e){
     	   return;

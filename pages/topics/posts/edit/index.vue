@@ -8,7 +8,7 @@
 			</div>
 			<button type="submit" name="submit" class="btn btn-primary">Submit</button>
 		</form>
-		<nuxt-link :to="`/topics/`+$route.params.topicid" class="btn btn-info btn-sm mt-5">Back</nuxt-link>
+		<NuxtLink :to="`/topics/`+$route.params.topicid" class="btn btn-info btn-sm mt-5">Back</NuxtLink>
 	</div>
 </template>
 

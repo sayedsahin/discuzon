@@ -31,7 +31,7 @@
             <!-- /toggle mobile menu -->
             <!-- logo -->
             <div class="tt-logo">
-              <nuxt-link to="/"><img src="/favicon.ico" alt=""></nuxt-link>
+              <NuxtLink to="/"><img src="/favicon.ico" alt=""></NuxtLink>
             </div>
             <!-- /logo -->
             <!-- desctop menu -->
@@ -45,7 +45,8 @@
                     <a href="page-single-user.html"><span>Pages</span></a>
                     <ul>
                       <li><a href="index.html">Home</a></li>
-                      <li><nuxt-link to="/topics">Topic</nuxt-link></li>
+                      <li><NuxtLink to="/topics">Topic</NuxtLink></li>
+                      <li><NuxtLink :to="{name: 'user-id', params: {id: 1}}">Profile</NuxtLink></li>
                     </ul>
                   </li>
                 </ul>
@@ -136,8 +137,8 @@
           </div>
           <div class="col-auto ml-auto">
             <div v-if="!authenticated" class="tt-account-btn">
-              <nuxt-link to="/login" class="btn btn-primary">Log in</nuxt-link>
-              <nuxt-link to="/register" class="btn btn-secondary">Sign up</nuxt-link>
+              <NuxtLink to="/login" class="btn btn-primary">Log in</NuxtLink>
+              <NuxtLink to="/register" class="btn btn-secondary">Sign up</NuxtLink>
             </div>
             <div v-else>
               <div class="tt-user-info d-flex justify-content-center">
@@ -151,7 +152,7 @@
                 <div class="w3-dropdown-hover">
                   <div class="btn btn-primary">{{user.name}}</div>
                   <div id="toggleUser" class="w3-dropdown-content w3-bar-block w3-border">
-                    <nuxt-link to="/profile" class="w3-bar-item w3-button">Profile</nuxt-link>
+                    <NuxtLink :to="{name: 'user-id', params: {id: user.id}}" class="w3-bar-item w3-button">Profile</NuxtLink>
                     <a href="/logout" @click.prevent="logout" class="w3-bar-item w3-button">Logout</a>
                   </div>
                 </div>

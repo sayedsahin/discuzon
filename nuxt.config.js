@@ -17,7 +17,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: '/css/w3.css' },
-      { rel: 'stylesheet', href: '/css/style.min.css' },
+      { rel: 'stylesheet', href: '/css/style.css' },
     ],
     script: [
       // { src: "/js/bundle.min.js", type: "text/javascript"}
@@ -39,6 +39,7 @@ export default {
     './plugins/mixins/user.js',
     './plugins/axios.js',
     './plugins/mixins/validation.js',
+    {src: './plugins/vue-observe-visibility', mode: 'client'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

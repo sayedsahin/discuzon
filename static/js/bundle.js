@@ -1950,7 +1950,7 @@ if ($ttDesctopMenu && toggleMobileMenu){
 /*
 	Button switching
 */
-(function(){
+/*(function(){
 	var ttPopupSettings= $('#js-settings-btn');
 	if (ttPopupSettings.length){
 		 ptToggleCol();
@@ -1990,7 +1990,7 @@ if ($ttDesctopMenu && toggleMobileMenu){
             return false;
         });
     };
-})();
+})();*/
 /*
     *messages-compose.html
 */

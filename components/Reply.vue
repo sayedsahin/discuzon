@@ -1,19 +1,21 @@
 <template>
 <div>
-  <div class="tt-single-topic-list">
-    <div class="tt-item" v-for="reply in replies" :key="reply.id">
+  <div class="tt-single-topic-list py-4">
+    <div class="tt-item" v-for="(reply, index) in replies" :key="index">
       <div class="tt-single-topic">
         <div class="tt-item-header pt-noborder">
           <div class="tt-item-info info-top">
             <div class="tt-avatar-icon">
-              <!-- <i class="tt-icon"><svg><use xlink:href="#icon-ava-t"></use></svg></i> -->
-              <img :src="reply.user.avatar" alt="" class="w3-round-xxlarge" width="40px">
+              <NuxtLink :to="{ name: 'user-id', params: {id: reply.user.id} }">
+                <img :src="reply.user.avatar" alt="" class="w3-round-xxlarge" width="40px">
+              </NuxtLink>
             </div>
             <div class="tt-avatar-title">
               <a href="#">{{ reply.user.name }}</a>
             </div>
             <a href="#" class="tt-info-time">
-              <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>{{ reply.created_at }}
+              <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>
+              <Time :timestamp="reply.created_at" />
             </a>
           </div>
         </div>
@@ -21,9 +23,9 @@
         </div>
 
         <Reaction :reaction="reply.reaction" :reacted="reply.reacted" :id="reply.id" :section="'reply'"/>
-        <div class="f-right" v-if="reply.user.id === $auth.user.id">
-          <nuxt-link :to="`/reply/${reply.id}/edit`" class="ed">Edit</nuxt-link>
-          <a href="" class="ed">Delete</a>
+        <div class="f-right" v-if="authenticated && reply.user.id === user.id">
+          <NuxtLink :to="`/reply/${reply.id}/edit`" class="ed">Edit</NuxtLink>
+          <a @click.prevent="deleteReply(reply.id, index)" href="" class="ed"><svg v-if="spin == reply.id" style="width: 14px;" class="w3-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M296 48c0 22.091-17.909 40-40 40s-40-17.909-40-40 17.909-40 40-40 40 17.909 40 40zm-40 376c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zm248-168c0-22.091-17.909-40-40-40s-40 17.909-40 40 17.909 40 40 40 40-17.909 40-40zm-416 0c0-22.091-17.909-40-40-40S8 233.909 8 256s17.909 40 40 40 40-17.909 40-40zm20.922-187.078c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40c0-22.092-17.909-40-40-40zm294.156 294.156c-22.091 0-40 17.909-40 40s17.909 40 40 40c22.092 0 40-17.909 40-40s-17.908-40-40-40zm-294.156 0c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40z"/></svg> Delete</a>
         </div>
       </div>
     </div>
@@ -61,6 +63,7 @@ export default {
   data () {
     return {
       older: '',
+      spin:false,
     }
   }, 
   /*computed: {
@@ -75,6 +78,20 @@ export default {
       let data = await this.$axios.$get(link+order_by);
       this.$emit('changeReplies', data.data)
       this.$emit('changePages', data.meta.links)
+    },
+
+    async deleteReply(replyId, index){
+      if (confirm('Do you really want to delete?')) {
+        try{
+          this.spin = replyId
+          await this.$axios.$delete(`reply/${replyId}`)
+          this.replies.splice(index, 1);
+        }catch(e){
+          this.spin = false
+          return
+        }
+      }
+      
     }
   }
 }

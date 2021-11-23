@@ -4,7 +4,7 @@
 	    <div class="container">
 	        <div class="tt-loginpages-wrapper">
 	            <div class="tt-loginpages">
-	                <nuxt-link to="/" class="tt-block-title">
+	                <NuxtLink to="/" class="tt-block-title">
 	                    <img src="/favicon.ico" width="80px">
 	                    <div class="tt-title">
 	                        Welcome to Forum19
@@ -12,7 +12,7 @@
 	                    <div class="tt-description">
 	                       Join the forum to unlock true power of community.
 	                    </div>
-	                </nuxt-link>
+	                </NuxtLink>
 	                <form @submit.prevent="submit" class="form-default">
 	                	<div v-if="errors.message" class="w3-panel w3-pale-red w3-border w3-round">{{errors.message}}</div>
 	                    <div class="form-group">
@@ -65,7 +65,7 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <p>Already have an account? <nuxt-link to="/login" class="tt-underline">Login here</nuxt-link></p>
+	                    <p>Already have an account? <NuxtLink to="/login" class="tt-underline">Login here</NuxtLink></p>
 	                    <div class="tt-notes">
 	                        By signing up, signing in or continuing, I agree to
 	                        Forum19’s <a href="#" class="tt-underline">Terms of Use</a> and <a href="#" class="tt-underline">Privacy Policy.</a>

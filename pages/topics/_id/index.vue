@@ -6,7 +6,7 @@
 			<div v-for="(post, index) in topic.posts" :key="index" class="ml-5">
 				<div class="lead">{{post.body}}</div>
 				<div v-if="user.id === post.user.id" class="float-right">
-					<nuxt-link :to="{name: 'topics-posts-edit', params: {topicid: topic.id, postid: post.id}}" class="btn btn-outline-dark btn-sm">Edit</nuxt-link>
+					<NuxtLink :to="{name: 'topics-posts-edit', params: {topicid: topic.id, postid: post.id}}" class="btn btn-outline-dark btn-sm">Edit</NuxtLink>
 					<button @click="deletePost(topic.id, post.id)" class="btn btn-danger btn-sm">x</button>
 				</div>
 				<p class="text-secondary">{{post.created_at}} by {{post.user.name}}</p>

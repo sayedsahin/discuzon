@@ -7,7 +7,7 @@
         <!-- /Topic Component -->
       </div>
 
-      <div class="tt-single-topic-list">
+      <div class="tt-single-topic-list pt-4">
         <div class="tt-item">
           <div class="tt-info-box">
               <h6 class="tt-title">Thread Status</h6>
@@ -86,6 +86,7 @@
           @changeReplies="replies = $event"
           @changePages="pages = $event"
         />
+          <!-- @deleteReply="replies = replies.splice($event, 1)" -->
         <!-- /Reply Component -->
 
       <div class="tt-topic-list" v-if="!authenticated">
