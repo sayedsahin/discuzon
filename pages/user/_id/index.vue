@@ -21,14 +21,17 @@
 							</ul>
 						</div>
 						<div class="tt-col-btn" id="js-settings-btn">
-							<div class="tt-list-btn">
-								<a v-if="authenticated && user.id === profileUser.id" @click.prevent="setting = true" href="" class="tt-btn-icon">
+							<div class="tt-list-btn" v-if="authenticated">
+								<a v-if="user.id === profileUser.id" @click.prevent="setting = true" href="" class="tt-btn-icon">
 									<svg class="tt-icon">
 										<use xlink:href="#icon-settings_fill"></use>
 									</svg>
 								</a>
-								<a href="#" class="btn btn-primary">Message</a>
-								<a href="#" class="btn btn-secondary">Follow</a>
+								<a v-if="user.id !== profileUser.id" href="#" class="btn btn-primary">Message</a>
+								<a @click.prevent="following( $route.params.id )" v-if="user.id !== profileUser.id" href="" class="btn btn-secondary">{{ follow.isFollowing ? 'Unfollow' : 'Follow' }}</a>
+							</div>
+							<div class="tt-list-btn" v-else>
+								<a @click.prevent="$router.push('/login')" href="/login" class="btn btn-secondary">Follow</a>
 							</div>
 						</div>
 					</div>
@@ -48,10 +51,10 @@
 								<a @click.prevent="show = 'reply'" :class="`nav-link${ show === 'reply' ? ' active' : '' }`" href=""><span>Replies</span></a>
 							</li>
 							<li class="nav-item tt-hide-xs">
-								<a @click.prevent="show = 'followers'" :class="`nav-link${ show === 'followers' ? ' active' : '' }`" href=""><span>526 Followers</span></a>
+								<a @click.prevent="show = 'followers'" :class="`nav-link${ show === 'followers' ? ' active' : '' }`" href=""><span>{{ follow.followers }} Followers</span></a>
 							</li>
 							<li class="nav-item tt-hide-md">
-								<a @click.prevent="show = 'following'" :class="`nav-link${ show === 'following' ? ' active' : '' }`" href=""><span>489 Following</span></a>
+								<a @click.prevent="show = 'following'" :class="`nav-link${ show === 'following' ? ' active' : '' }`" href=""><span>{{ follow.following }} Following</span></a>
 							</li>
 						</ul>
 					</div>
@@ -93,15 +96,13 @@ export default {
   computed: {
     ...mapGetters ({
       profileUser: 'profile/profileUser',
+      follow: 'profile/follow',
     })
   },
 
   methods: {
-    settings () {
-      alert('hellow')
-      if (this.setting == true) {
-      	this.setting = false
-      }
+    following (id) {
+      this.$store.dispatch('profile/following', id)
     }
   },
 }

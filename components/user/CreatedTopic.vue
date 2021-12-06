@@ -16,7 +16,7 @@
       <div class="row align-items-center no-gutters">
         <div class="col-9">
           <ul class="tt-list-badge">
-            <li class="show-mobile"><a href=""><span class="tt-color12 tt-badge">{{ activity.activity.category.name }}</span></a></li>
+            <li class="show-mobile"><NuxtLink :to="{ name: 'category-slug', params: { slug: activity.activity.category.slug }}"><span :class="`${activity.activity.category.color} tt-badge`">{{ activity.activity.category.name }}</span></NuxtLink></li>
           </ul>
         </div>
         <div class="col-3 ml-auto show-mobile">
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="tt-col-category tt-col-value-large col-lg-1"><span class="tt-color12 tt-badge">{{ activity.activity.category.name }}</span></div>
+    <div class="tt-col-category tt-col-value-large col-lg-1"><NuxtLink :to="{ name: 'category-slug', params: { slug: activity.activity.category.slug }}"><span :class="`${activity.activity.category.color} tt-badge`">{{ activity.activity.category.name }}</span></NuxtLink></div>
     <div class="tt-col-value-large hide-mobile col-lg-2 w3-right-align"><Time :timestamp="activity.created_at"/></div>
   </div>
 </template>

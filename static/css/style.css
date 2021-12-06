@@ -74,6 +74,36 @@
 }
 
 .fixed-bottom{ position: fixed; left: 10px; bottom: 5px; }
+
+/*flicker-animation*/
+@keyframes flicker-animation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flicker-animation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flicker-animation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flicker-animation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flicker-animation 1s infinite;
+   -moz-animation: flicker-animation 1s infinite;
+   -o-animation: flicker-animation 1s infinite;
+    animation: flicker-animation 1s infinite;
+}
+
+.active-fill { fill: #2172cd; }
 /*-------  1.1 Bootstrap  --------*/
 /* Bootstrap variables */
 /* Colors */
@@ -4681,7 +4711,8 @@ hr {
     width: 100%;
     padding: 1px;
     border-radius: 3px;
-    display: none; }
+    /*display: none; */
+  }
     .tt-search .search-results ul {
       list-style: none;
       padding: 0;
@@ -4738,7 +4769,8 @@ hr {
         color: #182730; }
   .tt-search .tt-search-scroll {
     height: 261px;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    overflow: scroll;
     position: relative; }
 
 .tt-search-toggle {

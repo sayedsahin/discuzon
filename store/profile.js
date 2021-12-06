@@ -7,6 +7,9 @@ export default {
 			current_page: 1,
 			topics: [],
 			replies: [],
+			follow: [],
+			followings: [],
+			followers: [],
 		}
 	},
 
@@ -26,6 +29,18 @@ export default {
 
 		replies(state){
 			return state.replies;
+		},
+
+		follow(state){
+			return state.follow;
+		},
+
+		followings(state){
+			return state.followings;
+		},
+
+		followers(state){
+			return state.followers;
 		},
 
 	},
@@ -65,12 +80,35 @@ export default {
 		APPEND_REPLIES (state, replies) {
 			state.replies = [...state.replies, ...replies]
 		},
+
+		// Following
+		SET_FOLLOW (state, follow){
+			state.follow = follow;
+		},
+
+		SET_FOLLOWINGS (state, followings){
+			state.followings = followings;
+		},
+
+		APPEND_FOLLOWINGS (state, followings) {
+			state.followings = [...state.followings, ...followings]
+		},
+
+		// Followers
+		SET_FOLLOWERS (state, followers){
+			state.followers = followers;
+		},
+
+		APPEND_FOLLOWERS (state, followers) {
+			state.followers = [...state.followers, ...followers]
+		},
 	},
 
 	actions: {
 		async getUser({ commit }, id) {
-		    let {data} = await this.$axios.$get(`/user/${id}`);
-	        commit('SET_USER', data);
+		    let data = await this.$axios.$get(`/user/${id}`);
+	        commit('SET_USER', data.data);
+	        commit('SET_FOLLOW', data.follow);
 		},
 
 		// Activities
@@ -113,6 +151,33 @@ export default {
 		async userUpdate({ commit }, formData) {
 			let { data } = await this.$axios.$post(`/user`, formData);
 			commit('SET_USER', data);
-		}
+		},
+
+		// Following
+		async following({ commit }, id) {
+			let { data } = await this.$axios.$post(`user/${id}/following`);
+			commit('SET_FOLLOW', data);
+		},
+
+		async getFollowings({ commit }, id) {
+			let { data } = await this.$axios.$get(`user/${id}/following`);
+			commit('SET_FOLLOWINGS', data);
+		},
+
+		async getMoreFollowings({ commit }, value) {
+			let { data } = await this.$axios.$get(`user/${value.id}/following?page=${value.page}`);
+			commit('APPEND_FOLLOWINGS', data);
+		},
+
+		// Followers
+		async getFollowers({ commit }, id) {
+			let { data } = await this.$axios.$get(`user/${id}/followers`);
+			commit('SET_FOLLOWERS', data);
+		},
+
+		async getMoreFollowers({ commit }, value) {
+			let { data } = await this.$axios.$get(`user/${value.id}/followers?page=${value.page}`);
+			commit('APPEND_FOLLOWERS', data);
+		},
 	}
 }

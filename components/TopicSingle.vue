@@ -22,7 +22,7 @@
         </h3>
         <div class="tt-item-tag">
           <ul class="tt-list-badge">
-            <li><NuxtLink :to="`/category/${topic.category.slug}`"><span class="tt-color12 tt-badge">{{ topic.category.name }}</span></NuxtLink></li>
+            <li><NuxtLink :to="{ name: 'category-slug', params: { slug: topic.category.slug }}"><span :class="`${topic.category.color} tt-badge`">{{ topic.category.name }}</span></NuxtLink></li>
 
             <li v-for="(tag, index) in topic.tags" :key="index"><NuxtLink :to="`/tag/${tag.name}`"><span class="tt-badge">{{ tag.name }}</span></NuxtLink></li>
           </ul>

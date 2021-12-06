@@ -120,6 +120,7 @@
 
 <script>
 export default {
+	middleware: ['auth'],
 	props: {
 	  profileUser: {
 	    type: Object,

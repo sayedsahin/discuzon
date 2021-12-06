@@ -46,7 +46,8 @@
                     <ul>
                       <li><a href="index.html">Home</a></li>
                       <li><NuxtLink to="/topics">Topic</NuxtLink></li>
-                      <li><NuxtLink :to="{name: 'user-id', params: {id: 1}}">Profile</NuxtLink></li>
+                      <li><NuxtLink :to="{name: 'user-id', params: {id: 2}}">Profile</NuxtLink></li>
+                      <li><NuxtLink :to="{name: 'category'}">Category</NuxtLink></li>
                     </ul>
                   </li>
                 </ul>
@@ -62,9 +63,9 @@
                 </svg>
               </button>
               <!-- /toggle -->
-              <form class="search-wrapper">
+              <form @submit.prevent="search()" class="search-wrapper">
                 <div class="search-form">
-                  <input type="text" class="tt-search__input" name="search" placeholder="Search">
+                  <input v-model.trim="query" @keyup="liveSearch()" type="text" class="tt-search__input" name="search" placeholder="Search" autocomplete="off">
                   <button class="tt-search__btn" type="submit">
                     <svg class="tt-icon">
                       <use xlink:href="#icon-search"></use>
@@ -76,60 +77,28 @@
                     </svg>
                   </button>
                 </div>
-                <div class="search-results">
-                  <div class="tt-search-scroll">
+                <div class="search-results" v-if="showResult">
+                  <div class="tt-search-scroll scroll" v-if="liveSearches.length !== 0">
                     <ul>
-                      <li>
-                        <a href="page-single-topic.html">
-                          <h6 class="tt-title">Rdr2 secret easter eggs</h6>
-                          <div class="tt-description">
-                            Here’s what I’ve found in Red Dead Redem..
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="page-single-topic.html">
-                          <h6 class="tt-title">Top 10 easter eggs in Red Dead Rede..</h6>
-                          <div class="tt-description">
-                            You can find these easter eggs in Red Dea..
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="page-single-topic.html">
-                          <h6 class="tt-title">Red Dead Redemtion: Arthur Morgan..</h6>
-                          <div class="tt-description">
-                            Here’s what I’ve found in Red Dead Redem..
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="page-single-topic.html">
-                          <h6 class="tt-title">Rdr2 secret easter eggs</h6>
-                          <div class="tt-description">
-                            Here’s what I’ve found in Red Dead Redem..
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="page-single-topic.html">
-                          <h6 class="tt-title">Top 10 easter eggs in Red Dead Rede..</h6>
-                          <div class="tt-description">
-                            You can find these easter eggs in Red Dea..
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="page-single-topic.html">
-                          <h6 class="tt-title">Red Dead Redemtion: Arthur Morgan..</h6>
-                          <div class="tt-description">
-                            Here’s what I’ve found in Red Dead Redem..
-                          </div>
-                        </a>
+                      <li v-for="(search, index) in liveSearches" :key="index">
+                        <NuxtLink :to="{name: 'topic-id', params: {id: search.id }}">
+                          <h6 class="tt-title" style="white-space: normal;">{{ search.title }}</h6>
+                          <div class="tt-description" v-html="search.body.substring(0, 22)"></div>
+                        </NuxtLink>
                       </li>
                     </ul>
+                    
+                    <div class="tt-row-btn py-0">
+                      <button type="button" class="btn-icon js-topiclist-showmore">
+                        <svg :class="`tt-icon${loader}`">
+                          <use xlink:href="#icon-load_lore_icon"></use>
+                        </svg>
+                      </button>
+                      <div v-observe-visibility="visibilityChange"></div>
+                    </div>
                   </div>
-                  <button type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Advanced Search</button>
+                  <div class="p-1 text-center" v-else>Not Found</div>
+                  <button @click.prevent="search()" type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Go Search Page</button>
                 </div>
               </form>
             </div>
@@ -145,12 +114,13 @@
                 <a href="#" class="tt-btn-icon">
                   <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
                 </a>
-                <div class="tt-avatar-icon tt-size-md">
-                  <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
+                <div class="tt-col-avatar tt-size-md">
+                  <img :src="user.avatar" alt="" class="w3-round-xxlarge">
+                  <!-- <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i> -->
                 </div>
 
                 <div class="w3-dropdown-hover">
-                  <div class="btn btn-primary">{{user.name}}</div>
+                  <div class="btn btn-primary">{{user.name.split(' ')[0]}}</div>
                   <div id="toggleUser" class="w3-dropdown-content w3-bar-block w3-border">
                     <NuxtLink :to="{name: 'user-id', params: {id: user.id}}" class="w3-bar-item w3-button">Profile</NuxtLink>
                     <a href="/logout" @click.prevent="logout" class="w3-bar-item w3-button">Logout</a>
@@ -162,6 +132,7 @@
         </div>
       </div>
     </header>
+    <div @click="showResult = false" v-if="showResult" class="modal-filter" style="opacity: 1;"></div>
   </div>
 </template>
 
@@ -169,12 +140,44 @@
 export default {
   data () {
     return {
-
+      query: '',
+      liveSearches: [],
+      showResult: false,
+      loader: '',
+      page: 1,
     }
   },
   methods: {
     logout(){
       this.$auth.logout()
+    },
+
+    search(){
+      if (this.query) {
+        this.$router.push({name: 'search-query', params: {query: this.query}})
+      }
+    },
+
+    async liveSearch() {
+      if (this.query.length > 3) {
+        let data = await this.$axios.$get(`/search/live?query=${this.query}`);
+        this.liveSearches = data
+        this.showResult = true
+        this.page = 1
+      }else{
+        this.showResult = false
+      }
+    },
+    async visibilityChange(isVisibale){
+      if (!isVisibale) {
+        return;
+      }
+      this.loader = ' animate-flicker';
+      // return
+      ++this.page;
+      let result = await this.$axios.$get(`/search/live?query=${this.query}&page=${this.page}`);
+      this.liveSearches = [...this.liveSearches, ...result];
+      this.loader = '';
     }
   }
 }

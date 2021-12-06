@@ -20,7 +20,7 @@
 					<div class="row align-items-center no-gutters hide-desktope">
 						<div class="col-9">
 							<ul class="tt-list-badge">
-								<li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">{{reply.category.name}}</span></a></li>
+								<li class="show-mobile"><NuxtLink :to="{ name: 'category-slug', params: { slug: reply.category.slug }}"><span :class="`${reply.category.color} tt-badge`">{{reply.category.name}}</span></NuxtLink></li>
 							</ul>
 						</div>
 						<div class="col-3 ml-auto show-mobile">
@@ -29,7 +29,7 @@
 					</div>
 					<div class="tt-content" v-html="reply.body"></div>
 				</div>
-				<div class="tt-col-category"><a href="#"><span class="tt-color06 tt-badge">{{reply.category.name}}</span></a></div>
+				<div class="tt-col-category"><NuxtLink :to="{ name: 'category-slug', params: { slug: reply.category.slug }}"><span :class="`${reply.category.color} tt-badge`">{{reply.category.name}}</span></NuxtLink></div>
 				<div class="tt-col-value-large hide-mobile"><Time :timestamp="reply.created_at"/></div>
 			</div>
 
