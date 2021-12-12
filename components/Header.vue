@@ -48,6 +48,7 @@
                       <li><NuxtLink to="/topics">Topic</NuxtLink></li>
                       <li><NuxtLink :to="{name: 'user-id', params: {id: 2}}">Profile</NuxtLink></li>
                       <li><NuxtLink :to="{name: 'category'}">Category</NuxtLink></li>
+                      <li><NuxtLink :to="{name: 'tags'}">Tags</NuxtLink></li>
                     </ul>
                   </li>
                 </ul>
@@ -81,7 +82,7 @@
                   <div class="tt-search-scroll scroll" v-if="liveSearches.length !== 0">
                     <ul>
                       <li v-for="(search, index) in liveSearches" :key="index">
-                        <NuxtLink :to="{name: 'topic-id', params: {id: search.id }}">
+                        <NuxtLink :to="!search.reply_id ? {name: 'topic-id', params: {id: search.id }} : {name: 'topic-id', params: {id: search.id }, query: {reply: search.reply_id}, hash: '#reply'}">
                           <h6 class="tt-title" style="white-space: normal;">{{ search.title }}</h6>
                           <div class="tt-description" v-html="search.body.substring(0, 22)"></div>
                         </NuxtLink>

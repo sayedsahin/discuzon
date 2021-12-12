@@ -16,8 +16,9 @@
         <NuxtLink :to="{name: 'topic-id', params: {id: activity.activity.topic_id }}">{{ activity.activity.topic_title }}</NuxtLink>
       </h6>
       <div class="tt-col-message" v-if="activity.activity.reactable_type == 'reply'">
-        {{username}}
-        <NuxtLink :to="{name: 'topic-id', params: {id: activity.activity.topic_id }}"> {{ activity.activity.type }} </NuxtLink>reply: <span v-html="activity.activity.body"></span>
+        {{username}} {{ activity.activity.type }}
+        <NuxtLink :to="{name: 'topic-id', params: {id: activity.activity.topic_id }, query: {reply: activity.activity.reply_id }, hash: '#reply'}"> reply: </NuxtLink>
+        <span v-html="activity.activity.body"></span>
       </div>
       <div class="row align-items-center no-gutters hide-desktope">
         <div class="col-9">

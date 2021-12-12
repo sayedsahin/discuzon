@@ -14,7 +14,7 @@
       </h6>
       <div class="tt-col-message">
         {{username}}
-        <NuxtLink :to="{name: 'topic-id', params: {id: activity.activity.topic_id }}"> replied: </NuxtLink><span v-html="activity.activity.body"></span>
+        <NuxtLink :to="{name: 'topic-id', params: {id: activity.activity.topic_id }, query: {reply: activity.activity.reply_id }, hash: '#reply'}"> replied: </NuxtLink><span v-html="activity.activity.body"></span>
       </div>
       <div class="row align-items-center no-gutters hide-desktope">
         <div class="col-9">

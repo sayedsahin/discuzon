@@ -114,10 +114,11 @@ export default {
   methods: {
     async createReply () {
     	try{
-	      let data = await this.$axios.$post(`/topic/${this.$route.params.id}/reply`, {
-					body: this.body
-				});
-				this.$emit('Replies', data.data);
+
+        await this.$store.dispatch('reply/createReply', {
+          body: this.body,
+          id: this.$route.params.id
+        });
 				this.body = '';
         this.success = 'Reply successful created'
         setTimeout(() => this.success = false, 5000)

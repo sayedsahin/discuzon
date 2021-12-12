@@ -15,7 +15,7 @@
 				</div>
 				<div class="tt-col-description">
 					<h6 class="tt-title">
-						<NuxtLink :to="{ name: 'topic-id', params: {id: reply.topic_id }}">{{reply.title}}</NuxtLink>
+						<NuxtLink :to="{ name: 'topic-id', params: {id: reply.topic_id }, query: {reply: reply.id}, hash: '#reply'}">{{reply.title}}</NuxtLink>
 					</h6>
 					<div class="row align-items-center no-gutters hide-desktope">
 						<div class="col-9">

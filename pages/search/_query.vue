@@ -42,7 +42,8 @@
 								<use v-if="!search.reply_id" xlink:href="#icon-verified"></use>
 								<use v-if="search.reply_id" xlink:href="#icon-reply"></use>
 							</svg>
-							<NuxtLink :to="{name: 'topic-id', params: {id: search.id }}">{{ search.title }}</NuxtLink>
+							<NuxtLink v-if="!search.reply_id" :to="{name: 'topic-id', params: {id: search.id }}">{{ search.title }}</NuxtLink>
+							<NuxtLink v-if="search.reply_id" :to="{name: 'topic-id', params: {id: search.id }, query: {reply: search.reply_id}, hash: '#reply'}">{{ search.title }}</NuxtLink>
 						</h6>
 						<div class="tt-col-message">
 							<span v-html="search.body"></span>

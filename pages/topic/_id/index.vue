@@ -53,21 +53,21 @@
               <h6 class="tt-title">Some Reply's User</h6>
               <div class="tt-row-icon">
                 <div class="tt-item" v-for="(replyUser, index) in replies.slice(0, 7)" :key="index">
-                    <a href="#" class=" tt-icon-avatar">
+                    <NuxtLink :to="{ name: 'user-id', params: { id: replyUser.user.id }}" class=" tt-icon-avatar">
                         <!-- <svg><use xlink:href="#icon-ava-d"></use></svg> -->
                         <img :src="replyUser.user.avatar" alt="" class="w3-round-xxlarge" width="40px">
-                    </a>
+                    </NuxtLink>
                 </div>
               </div>
               <hr>
               <div class="row-object-inline form-default">
                   <h6 class="tt-title">Sort replies:</h6>
                   <ul class="tt-list-badge tt-size-lg">
-                      <li><a @click.prevent="getReplies(url, 'recent')" href=""><span :class="`${order === 'recent' || order === '' ? 'tt-color02 ' : ''}tt-badge`">Recent</span></a></li>
-                      <li><a @click.prevent="getReplies(url, 'old')" href=""><span :class="`${order === 'old' ? 'tt-color02 ' : ''}tt-badge`">Oldest</span></a></li>
-                      <li><a @click.prevent="getReplies(url, 'react')" href=""><span :class="`${order === 'react' ? 'tt-color02 ' : ''}tt-badge`">Most Reacted</span></a></li>
+                      <li><a @click.prevent="getMoreReplies(url, 'recent')" href=""><span :class="`${order === 'recent' || order === '' ? 'tt-color02 ' : ''}tt-badge`">Recent</span></a></li>
+                      <li><a @click.prevent="getMoreReplies(url, 'old')" href=""><span :class="`${order === 'old' ? 'tt-color02 ' : ''}tt-badge`">Oldest</span></a></li>
+                      <li><a @click.prevent="getMoreReplies(url, 'react')" href=""><span :class="`${order === 'react' ? 'tt-color02 ' : ''}tt-badge`">Most Reacted</span></a></li>
                   </ul>
-                  <select @change="getReplies(url, $event.target.value)" class="tt-select form-control">
+                  <select @change="getMoreReplies(url, $event.target.value)" class="tt-select form-control">
                       <option value="recent">Recent</option>
                       <option value="old">Oldest</option>
                       <option value="react">Most Reacted</option>
@@ -77,17 +77,19 @@
         </div>
       </div>
 
+        <div v-if="loader" class="loader mx-auto my-4" style="position: unset;"></div>
         <!-- Reply Component -->
-        <Reply
+        <!-- <Reply
           ref="reply"
           :order='order'
           :replies="replies"
           :pages="pages"
           @changeReplies="replies = $event"
           @changePages="pages = $event"
-        />
+        /> -->
           <!-- @deleteReply="replies = replies.splice($event, 1)" -->
         <!-- /Reply Component -->
+        <Reply ref="reply"/>
 
       <div class="tt-topic-list" v-if="!authenticated">
         <div class="tt-item tt-item-popup">
@@ -184,35 +186,48 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
       order: '',
-      url: `/topic/${this.$route.params.id}?page=1`,
+      url: `/topic/replies/${this.$route.params.id}?page=1`,
+      // replies: [],
+      pages: [],
+      loader: true,
     }
   },
   async asyncData({$axios, params}){
     const {data} = await $axios.$get(`/topic/${params.id}`)
     return {
       topic: data.topic,
-      replies: data.replies.data,
-      pages: data.replies.meta.links,
     }
-    // await store.dispatch('topic/getTopic', params.id);
   },
-  /*computed: {
+  computed: {
     ...mapGetters ({
-      topic: 'topic/topic',
-      replies: 'topic/replies',
-    }) 
-  },*/
+      replies: 'reply/replies',
+    }),
+
+    async getReplies(){
+      let reply = this.$route.query.reply ? `?reply=${this.$route.query.reply}` : ''
+      await this.$store.dispatch('reply/getReplies', {
+        id: this.$route.params.id,
+        reply: reply,
+      });
+      this.loader = false
+    }
+  },
 
   methods: {
-    async getReplies(url, type){
+    async getMoreReplies(url, type){
       this.order = type
       this.$refs.reply.getReplies(url, type)
     },
   },
+
+  mounted() {
+    this.getReplies
+  }
   
 }
 </script>

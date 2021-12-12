@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="tt-single-topic-list py-4">
+  <div class="tt-single-topic-list py-4" id="reply">
     <div class="tt-item" v-for="(reply, index) in replies" :key="index">
       <div class="tt-single-topic">
         <div class="tt-item-header pt-noborder">
@@ -15,14 +15,14 @@
             </div>
             <a href="#" class="tt-info-time">
               <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>
-              <Time :timestamp="reply.created_at" />
+              <TimeFixed :timestamp="reply.created_at" />
             </a>
           </div>
         </div>
         <div class="tt-item-description" v-html="reply.body">
         </div>
 
-        <Reaction :reaction="reply.reaction" :reacted="reply.reacted" :id="reply.id" :section="'reply'"/>
+        <ReplyReaction :reaction="reply.reaction" :reacted="reply.reacted" :id="reply.id" :index="index"/>
         <div class="f-right" v-if="authenticated && reply.user.id === user.id">
           <NuxtLink :to="`/reply/${reply.id}/edit`" class="ed">Edit</NuxtLink>
           <a @click.prevent="deleteReply(reply.id, index)" href="" class="ed"><svg v-if="spin == reply.id" style="width: 14px;" class="w3-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M296 48c0 22.091-17.909 40-40 40s-40-17.909-40-40 17.909-40 40-40 40 17.909 40 40zm-40 376c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zm248-168c0-22.091-17.909-40-40-40s-40 17.909-40 40 17.909 40 40 40 40-17.909 40-40zm-416 0c0-22.091-17.909-40-40-40S8 233.909 8 256s17.909 40 40 40 40-17.909 40-40zm20.922-187.078c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40c0-22.092-17.909-40-40-40zm294.156 294.156c-22.091 0-40 17.909-40 40s17.909 40 40 40c22.092 0 40-17.909 40-40s-17.908-40-40-40zm-294.156 0c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40z"/></svg> Delete</a>
@@ -45,50 +45,36 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-	props: {
-	  replies: {
-	    type: [Object, Array],
-	    required: true,
-	  },
-    pages: {
-      type: Array,
-      required: true,
-    },
-    order: {
-      type: String,
-      default: ''
-    }
-	},
-
   data () {
     return {
-      older: '',
+      order: '',
       spin:false,
     }
   }, 
-  /*computed: {
+  computed: {
     ...mapGetters ({
-      replies: 'topic/replies',
-      pages: 'topic/pages',
+      replies: 'reply/replies',
+      pages: 'reply/pages',
     })
-  },*/
+  },
   methods: {
+    // Child To Parent
     async getReplies (link, order) {
+      this.order = order
       let order_by = order !== '' ? `&order=${order}` : '' ;
-      let data = await this.$axios.$get(link+order_by);
-      this.$emit('changeReplies', data.data)
-      this.$emit('changePages', data.meta.links)
+      await this.$store.dispatch('reply/getMoreReplies', link+order_by);
     },
 
     async deleteReply(replyId, index){
       if (confirm('Do you really want to delete?')) {
         try{
           this.spin = replyId
-          await this.$axios.$delete(`reply/${replyId}`)
-          this.replies.splice(index, 1);
+          await this.$store.dispatch('reply/deleteReply', {
+            id: replyId,
+            index: index
+          });
         }catch(e){
-          this.spin = false
-          return
+          return this.spin = false
         }
       }
       

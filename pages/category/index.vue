@@ -29,7 +29,7 @@
 								<ul class="tt-list-badge">
 									<li><NuxtLink :to="{ name: 'category-slug', params: { slug: category.slug }}"><span :class="`${category.color} tt-badge`">{{ category.name }}</span></NuxtLink></li>
 								</ul>
-								<h6 class="tt-title"><a href="page-categories-single.html">Threads - {{ category.count_topic }}</a></h6>
+								<h6 class="tt-title">Topics - {{ category.count_topic }}</h6>
 							</div>
 							<div class="tt-item-layout">
 								<div class="innerwrapper">
