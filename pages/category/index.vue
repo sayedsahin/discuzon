@@ -35,12 +35,12 @@
 								<div class="innerwrapper">
 									{{ category.description }}
 								</div>
-								<div class="innerwrapper">
+								<!-- <div class="innerwrapper">
 									<h6 class="tt-title">Similar TAGS</h6>
 									<ul class="tt-list-badge">
 										<li><a href="#"><span class="tt-badge">world politics</span></a></li>
 									</ul>
-								</div>
+								</div> -->
 								<a @click.prevent="toggleReaction(category.slug, index)" href="" class="tt-btn-icon">
 									<i class="tt-icon"><svg :class="category.reacted ? 'active-fill' : ''"><use xlink:href="#icon-favorite"></use></svg></i>
 								</a>

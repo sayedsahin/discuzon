@@ -110,7 +110,7 @@ export default {
   	},
     avatar(photo, email){
     	if (photo) {
-        return `http://nuxt.test/storage/${photo}`
+        return `http://nuxt.test/${photo}`
       }else{
         return `https://www.gravatar.com/avatar/${email}?s=80&d=mp`;
       }

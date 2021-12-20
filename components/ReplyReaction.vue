@@ -47,11 +47,16 @@ export default {
     	if (!this.$auth.loggedIn) {
 		    return this.$router.push('/login')
 		  }
-		  await this.$store.dispatch('reply/toggleReaction', {
-		  	id: this.id,
-		  	index: this.index,
-		  	reaction: reaction
-		  });
+		  try{
+			  await this.$store.dispatch('reply/toggleReaction', {
+			  	id: this.id,
+			  	index: this.index,
+			  	reaction: reaction
+			  });
+		      
+		  }catch(e){
+		    return
+		  }
     }
   },
 }

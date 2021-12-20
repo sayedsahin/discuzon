@@ -20,7 +20,7 @@
     </client-only>
     <header id="tt-header">
       <div class="container">
-        <div class="row tt-row no-gutters">
+        <div class="row tt-row no-gutters" style="position-relative">
           <div class="col-auto">
             <!-- toggle mobile menu -->
             <a class="toggle-mobile-menu" href="#">
@@ -112,8 +112,9 @@
             </div>
             <div v-else>
               <div class="tt-user-info d-flex justify-content-center">
-                <a href="#" class="tt-btn-icon">
-                  <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                <a @click.prevent="getNotifications()" href="" class="tt-btn-icon">
+                  <i class="tt-icon" style="position: relative;"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                  <span v-if="notifications_count > 0" class="notification-button w3-indigo">{{notifications_count}}</span>
                 </a>
                 <div class="tt-col-avatar tt-size-md">
                   <img :src="user.avatar" alt="" class="w3-round-xxlarge">
@@ -131,9 +132,41 @@
             </div>
           </div>
         </div>
+        <div class="notification-results" v-if="authenticated && showNotification">
+          <div class="tt-notification-scroll scroll" v-if="notifications.length !== 0">
+            <ul>
+              <li v-for="(notification, index) in notifications" :key="index" :class="!notification.read_at ? 'list-select' : ''">
+                
+                  <h6 class="tt-title" style="white-space: normal;">
+                    <svg class="tt-icon-2">
+                      <use v-if="notification.type === 'App\\Notifications\\CreateReplyNotification'" xlink:href="#icon-reply"></use>
+                      <use v-if="notification.type === 'App\\Notifications\\ReactionReplyNotification' || notification.type === 'App\\Notifications\\ReactionTopicNotification'" :xlink:href="`#icon-${notification.data.reaction_type}`"></use>
+                    </svg>
+                    <NuxtLink :to="{name: 'user-id', params: {id: notification.data.user.id}}">{{ notification.data.user.name }}</NuxtLink>
+                    <NuxtLink :to="{name: 'topic-id', params: {id: notification.notifiable_id }, query: {reply: notification.data.reply_id}, hash: '#reply'}" v-if="notification.type === 'App\\Notifications\\CreateReplyNotification'" class="text-underline">reply on your topic</NuxtLink>
+                    <NuxtLink :to="{name: 'topic-id', params: {id: notification.notifiable_id }, query: {reply: notification.data.reply_id}, hash: '#reply'}" v-if="notification.type === 'App\\Notifications\\ReactionReplyNotification'" class="text-underline">{{notification.data.reaction_type}} on your reply</NuxtLink>
+                    <NuxtLink :to="{name: 'topic-id', params: {id: notification.notifiable_id }}" v-if="notification.type === 'App\\Notifications\\ReactionTopicNotification'" class="text-underline">{{notification.data.reaction_type}} on your topic</NuxtLink>
+                  </h6>
+                
+              </li>
+            </ul>
+            
+            <div class="tt-row-btn py-0">
+              <button type="button" class="btn-icon js-topiclist-showmore">
+                <svg :class="`tt-icon${loader}`">
+                  <use xlink:href="#icon-load_lore_icon"></use>
+                </svg>
+              </button>
+              <div v-observe-visibility="moreNotifications"></div>
+            </div>
+          </div>
+          <div class="p-1 text-center" v-else>Not Found</div>
+          <button @click.prevent="search()" type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Go Notification Page</button>
+        </div>
       </div>
     </header>
     <div @click="showResult = false" v-if="showResult" class="modal-filter" style="opacity: 1;"></div>
+    <div @click="showNotification = !showNotification" v-if="showNotification" class="modal-filter" style="opacity: 1;"></div>
   </div>
 </template>
 
@@ -144,10 +177,25 @@ export default {
       query: '',
       liveSearches: [],
       showResult: false,
+      notifications: [],
+      notifications_count: 0,
+      showNotification: false,
       loader: '',
       page: 1,
+      notifyPage: 1,
     }
   },
+
+  computed: {
+    async notificationCount () {
+      if (!this.authenticated) {
+        return
+      }
+      let data = await this.$axios.$get(`/notifications/count`);
+      this.notifications_count = data
+    },
+  },
+
   methods: {
     logout(){
       this.$auth.logout()
@@ -179,10 +227,49 @@ export default {
       let result = await this.$axios.$get(`/search/live?query=${this.query}&page=${this.page}`);
       this.liveSearches = [...this.liveSearches, ...result];
       this.loader = '';
+    },
+
+    async getNotifications() {
+      if (this.showNotification) {
+        return this.showNotification = false
+      }
+      let data = await this.$axios.$get(`/notifications`);
+      this.notifications = data
+      this.showNotification = true
+      this.notifyPage = 1
+      this.notifications_count = 0
+    },
+
+    async moreNotifications(isVisibale){
+      if (!isVisibale) {
+        return;
+      }
+      this.loader = ' animate-flicker';
+      // return
+      ++this.notifyPage;
+      let data = await this.$axios.$get(`/notifications?page=${this.notifyPage}`);
+      this.notifications = [...this.notifications, ...data];
+      this.loader = '';
+    },
+
+  },
+
+  mounted(){
+    this.notificationCount
+  },
+  
+  watch: {
+    '$route': async function () {
+      if (!this.$auth.loggedIn) {
+        return
+      }
+      let data = await this.$axios.$get(`/notifications/count`);
+      this.notifications_count = data
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
+
 </style>

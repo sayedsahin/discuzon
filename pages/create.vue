@@ -388,7 +388,7 @@ export default {
 
     async createTag () {
     	try{ 
-	      let data = await this.$axios.$post('/tag', { name: this.tag })
+	      let data = await this.$axios.$post('/tags', { name: this.tag })
 	      this.formData.tags = [...this.formData.tags, data]
 	      this.tag = ''
     	}catch(e){
