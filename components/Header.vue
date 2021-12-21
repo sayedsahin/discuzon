@@ -141,11 +141,13 @@
                     <svg class="tt-icon-2">
                       <use v-if="notification.type === 'App\\Notifications\\CreateReplyNotification'" xlink:href="#icon-reply"></use>
                       <use v-if="notification.type === 'App\\Notifications\\ReactionReplyNotification' || notification.type === 'App\\Notifications\\ReactionTopicNotification'" :xlink:href="`#icon-${notification.data.reaction_type}`"></use>
+                      <use v-if="notification.type === 'App\\Notifications\\FollowNotification'" xlink:href="#icon-view"></use>
                     </svg>
                     <NuxtLink :to="{name: 'user-id', params: {id: notification.data.user.id}}">{{ notification.data.user.name }}</NuxtLink>
                     <NuxtLink :to="{name: 'topic-id', params: {id: notification.notifiable_id }, query: {reply: notification.data.reply_id}, hash: '#reply'}" v-if="notification.type === 'App\\Notifications\\CreateReplyNotification'" class="text-underline">reply on your topic</NuxtLink>
                     <NuxtLink :to="{name: 'topic-id', params: {id: notification.notifiable_id }, query: {reply: notification.data.reply_id}, hash: '#reply'}" v-if="notification.type === 'App\\Notifications\\ReactionReplyNotification'" class="text-underline">{{notification.data.reaction_type}} on your reply</NuxtLink>
                     <NuxtLink :to="{name: 'topic-id', params: {id: notification.notifiable_id }}" v-if="notification.type === 'App\\Notifications\\ReactionTopicNotification'" class="text-underline">{{notification.data.reaction_type}} on your topic</NuxtLink>
+                    <NuxtLink :to="{name: 'user-id', params: {id: notification.data.user.id}}" v-if="notification.type === 'App\\Notifications\\FollowNotification'" class="text-underline">Follow you</NuxtLink>
                   </h6>
                 
               </li>
@@ -161,7 +163,7 @@
             </div>
           </div>
           <div class="p-1 text-center" v-else>Not Found</div>
-          <button @click.prevent="search()" type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Go Notification Page</button>
+          <button @click.prevent="deleteNotifications()" type="button" class="tt-view-all">Clear Notification</button>
         </div>
       </div>
     </header>
@@ -251,6 +253,11 @@ export default {
       this.notifications = [...this.notifications, ...data];
       this.loader = '';
     },
+
+    async deleteNotifications(){
+      let data = await this.$axios.$delete(`/notifications`);
+      this.notifications = []
+    }
 
   },
 
