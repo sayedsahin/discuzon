@@ -37,84 +37,13 @@
 
 					<div class="pt-editor">
 						<h6 class="pt-title">Topic Body*</h6>
-						<div class="pt-row">
-							<div class="col-left">
-								<ul class="pt-edit-btn">
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-quote"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-bold"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-italic"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-share_topic"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-blockquote"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-performatted"></use>
-										</svg>
-									</button></li>
-									<li class="hr"></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-upload_files"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-bullet_list"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-heading"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-horizontal_line"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-emoticon"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-settings"></use>
-										</svg>
-									</button></li>
-									<li><button type="button" class="btn-icon">
-										<svg class="tt-icon">
-											<use xlink:href="#icon-color_picker"></use>
-										</svg>
-									</button></li>
-								</ul>
-							</div>
-						</div>
 
 						<!-- Body -->
 						<div class="form-group tt-value-wrapper">
-							<div class="mb-1 px-2 d-table w3-pale-red w3-border w3-round" v-if="errors.body">{{ errors.body[0] }}</div>
-							<textarea v-model="topic.body" name="body" class="form-control" rows="5" placeholder="Lets get started" :maxlength="max.body"></textarea>
-							<span class="tt-value-input" v-text="(max.body - topic.body.length)"></span>
+							<client-only>
+				        <Editor v-model="topic.body" :limit="2000"/>
+				      </client-only>
+							<div class="mt-1 px-2 d-table w3-pale-red w3-border w3-round" v-if="errors.body">{{ errors.body[0] }}</div>
 						</div>
 
 						<!-- Category -->

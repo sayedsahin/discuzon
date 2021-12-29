@@ -4,9 +4,9 @@
       <div class="tt-wrapper-inner">
         <a @click.prevent="$router.back()" class="tt-badge">Back</a> 
         <h1 class="tt-title-border">Edit Reply</h1>
-        <form class="form-default form-create-topic" @submit.prevent="updateReply()">
+        <form class="form-default form-create-topic">
           <div class="pt-editor pt-0">
-            <div class="pt-row">
+            <!-- <div class="pt-row">
               <div class="col-left">
                 <ul class="pt-edit-btn">
                   <li><button type="button" class="btn-icon">
@@ -77,19 +77,25 @@
                   </button></li>
                 </ul>
               </div>
-            </div>
+            </div> -->
 
             <!-- Body -->
-            <div class="form-group tt-value-wrapper">
+            <!-- <div class="form-group tt-value-wrapper">
               <div class="mb-1 px-2 d-table w3-pale-red w3-border w3-round" v-if="errors.body">{{ errors.body[0] }}</div>
               <textarea v-model="body" name="body" class="form-control" rows="5" placeholder="Lets get started" :maxlength="2000"></textarea>
               <span class="tt-value-input" v-text="(2000 - body.length)"></span>
-            </div>
+            </div> -->
+
+            <client-only>
+              <Editor v-model="body" :limit="2000"/>
+            </client-only>
+            <div class="mt-1 px-2 d-table w3-pale-red w3-border w3-round" v-if="errors.body">{{ errors.body[0] }}</div>
 
             <!-- Submit -->
             <div class="row">
               <div class="col-auto ml-md-auto">
-                <button type="submit" class="btn btn-secondary btn-width-lg">Edit Reply</button>
+
+                <button @click.prevent="updateReply()" type="submit" class="btn btn-secondary btn-width-lg">Edit Reply</button>
               </div>
             </div>
             <div v-if="success" class="fixed-bottom w3-panel w3-green p-2 w3-round" style="">{{success}}</div>
