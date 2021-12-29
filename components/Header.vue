@@ -270,6 +270,7 @@ export default {
       if (!this.$auth.loggedIn) {
         return
       }
+      // return
       let data = await this.$axios.$get(`/notifications/count`);
       this.notifications_count = data
     }

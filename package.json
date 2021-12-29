@@ -11,6 +11,9 @@
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "^5.13.6",
+    "@tiptap/extension-link": "^2.0.0-beta.33",
+    "@tiptap/starter-kit": "^2.0.0-beta.164",
+    "@tiptap/vue-2": "^2.0.0-beta.73",
     "core-js": "^3.15.1",
     "dayjs": "^1.10.7",
     "nuxt": "^2.15.7",
