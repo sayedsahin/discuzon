@@ -75,7 +75,8 @@ export default {
           property: 'token',
           global: true,
           // required: true,
-          type: 'Bearer'
+          type: 'Bearer',
+          maxAge: 2592000, //30 days
         },
         user: {
           property: '',
