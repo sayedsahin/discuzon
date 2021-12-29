@@ -19,22 +19,12 @@
 						</div>
 						<div class="tt-col-item">
 							<div class="tt-search">
-								<button class="tt-search-toggle" data-toggle="modal" data-target="#modalAdvancedSearch">
-									<svg class="tt-icon">
-										<use xlink:href="#icon-search"></use>
-									</svg>
-								</button>
-								<form class="search-wrapper">
+								<form @submit.prevent="search()" class="search-wrapper">
 									<div class="search-form">
-										<input type="text" class="tt-search__input" :placeholder="`Search in ${category.name}`">
+										<input v-model.trim="category_search" type="text" class="tt-search__input" :placeholder="`Search in ${category.name}`">
 										<button class="tt-search__btn" type="submit">
 											<svg class="tt-icon">
 												<use xlink:href="#icon-search"></use>
-											</svg>
-										</button>
-										<button class="tt-search__close">
-											<svg class="tt-icon">
-												<use xlink:href="#icon-cancel"></use>
 											</svg>
 										</button>
 									</div>
@@ -118,6 +108,7 @@ export default {
     return {
     	loader: '',
     	page: 1,
+    	category_search: ''
     }
   },
 
@@ -155,6 +146,12 @@ export default {
 	    let reacted = data ? true : false;
 	    this.$store.commit('category/REACTED_CATEGORY', reacted)
 	    return;
+	  },
+
+	  search() {
+	  	if (this.category_search) {
+		  	this.$router.push({name: 'category-slug-query', params: {query: this.category_search}})
+		  }
 	  }
   },
 }
