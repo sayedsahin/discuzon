@@ -1,29 +1,45 @@
 <template>
   <div>
-    <client-only>
-      <!-- Client only nav not working ssr:true. should be fix error  -->
-      <nav class="panel-menu" id="mobile-menu">
-        <ul>
-        </ul>
-        <div class="mm-navbtn-names">
-          <div class="mm-closebtn">
-            Close
-            <div class="tt-icon">
-              <svg>
-                <use xlink:href="#icon-cancel"></use>
-              </svg>
-            </div>
-          </div>
-          <div class="mm-backbtn">Back</div>
+    <div class="mm-open" v-if="nav_open"><div @click.prevent="nav_open = !nav_open" class="mm-fullscreen-bg d-block"></div></div>
+    <nav :class="`panel-menu${nav_open ? ' mmitemopen' : ''}`" id="mobile-menu">
+      <div class="mmpanels">
+        <div class="mmpanel mmopened mmcurrent" id="mm0">
+          <ul>
+            <li class="mm-close-parent">
+              <a @click.prevent="nav_open = !nav_open" href="" data-target="#close" class="mm-close">
+                Close
+                <div class="tt-icon">
+                  <svg>
+                    <use xlink:href="#icon-cancel"></use>
+                  </svg>
+                </div>
+              </a>
+            </li>
+
+            <li><a href="page-tabs.html"><span>Trending</span></a></li>
+            <li><NuxtLink :to="{name: 'following'}"><span>Following</span></NuxtLink></li>
+            <li><NuxtLink :to="{name: 'category'}"><span>Categories</span></NuxtLink></li>
+            <li><NuxtLink :to="{name: 'tags'}"><span>Tags</span></NuxtLink></li>
+            <li><a href="#mm1" data-target="#mm1" class="mm-next-level"><span>Pages</span></a>
+
+            </li>
+          </ul>
         </div>
-      </nav>
-    </client-only>
+        <div class="mmpanel mmhidden" id="mm1">
+          <ul>
+            <li><a href="#" data-target="#" class="mm-prev-level">Back</a></li>
+            <li><a href="page-single-user.html" class="mm-original-link"><span>More</span></a></li>
+            <li class="active"><a href="index.html">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <header id="tt-header">
       <div class="container">
         <div class="row tt-row no-gutters" style="position-relative">
           <div class="col-auto">
             <!-- toggle mobile menu -->
-            <a class="toggle-mobile-menu" href="#">
+            <a @click.prevent="nav_open = !nav_open" class="toggle-mobile-menu" href="#">
               <svg class="tt-icon">
                 <use xlink:href="#icon-menu_icon"></use>
               </svg>
@@ -38,17 +54,13 @@
             <div class="tt-desktop-menu">
               <nav>
                 <ul>
-                  <li><a href="page-categories.html"><span>Categories</span></a></li>
                   <li><a href="page-tabs.html"><span>Trending</span></a></li>
-                  <li><a href="page-create-topic.html"><span>New</span></a></li>
+                  <li><NuxtLink :to="{name: 'category'}"><span>Categories</span></NuxtLink></li>
+                  <li><NuxtLink :to="{name: 'tags'}"><span>Tags</span></NuxtLink></li>
                   <li>
-                    <a href="page-single-user.html"><span>Pages</span></a>
+                    <a href="#"><span>More</span></a>
                     <ul>
-                      <li><a href="index.html">Home</a></li>
-                      <li><NuxtLink to="/topics">Topic</NuxtLink></li>
-                      <li><NuxtLink :to="{name: 'user-id', params: {id: 2}}">Profile</NuxtLink></li>
-                      <li><NuxtLink :to="{name: 'category'}">Category</NuxtLink></li>
-                      <li><NuxtLink :to="{name: 'tags'}">Tags</NuxtLink></li>
+                      <li><NuxtLink :to="{name: 'following'}">Following</NuxtLink></li>
                     </ul>
                   </li>
                 </ul>
@@ -58,7 +70,7 @@
             <!-- tt-search -->
             <div class="tt-search">
               <!-- toggle -->
-              <button class="tt-search-toggle" data-toggle="modal" data-target="#modalAdvancedSearch">
+              <button @click.prevent="$router.push({name: 'search-query'})" class="tt-search-toggle">
                 <svg class="tt-icon">
                   <use xlink:href="#icon-search"></use>
                 </svg>
@@ -99,7 +111,7 @@
                     </div>
                   </div>
                   <div class="p-1 text-center" v-else>Not Found</div>
-                  <button @click.prevent="search()" type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Go Search Page</button>
+                  <button @click.prevent="search()" type="button" class="tt-view-all">Go Search Page</button>
                 </div>
               </form>
             </div>
@@ -116,18 +128,14 @@
                   <i class="tt-icon" style="position: relative;"><svg><use xlink:href="#icon-notification"></use></svg></i>
                   <span v-if="notifications_count > 0" class="notification-button w3-indigo">{{notifications_count}}</span>
                 </a>
-                <div class="tt-col-avatar tt-size-md">
+                <div class="tt-col-avatar tt-size-md w3-dropdown-hover">
                   <img :src="user.avatar" alt="" class="w3-round-xxlarge">
-                  <!-- <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i> -->
-                </div>
-
-                <div class="w3-dropdown-hover">
-                  <div class="btn btn-primary">{{user.name.split(' ')[0]}}</div>
-                  <div id="toggleUser" class="w3-dropdown-content w3-bar-block w3-border">
+                  <div class="w3-dropdown-content w3-bar-block w3-border">
                     <NuxtLink :to="{name: 'user-id', params: {id: user.id}}" class="w3-bar-item w3-button">Profile</NuxtLink>
                     <a href="/logout" @click.prevent="logout" class="w3-bar-item w3-button">Logout</a>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -185,6 +193,9 @@ export default {
       loader: '',
       page: 1,
       notifyPage: 1,
+      dropdown: false,
+
+      nav_open: false,
     }
   },
 
