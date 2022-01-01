@@ -59,7 +59,7 @@ export default {
 	actions: {
 
 		async getReplies({ commit }, topic) {
-			let { data, meta } = await this.$axios.$get(`/topic/replies/${topic.id}${topic.reply}`)
+			let { data, meta } = await this.$axios.$get(`/topic/${topic.id}${topic.reply}/replies`)
 			commit('SET_REPLIES', data);
 			commit('SET_REPLIES_PAGINATION', meta.links);
 		},
