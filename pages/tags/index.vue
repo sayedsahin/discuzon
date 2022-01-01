@@ -4,10 +4,10 @@
 			<div class="tt-categories-title">
 				<div class="tt-title">Tags</div>
 				<div class="tt-search">
-					<form class="search-wrapper">
+					<form @submit.prevent="" class="search-wrapper">
 						<div class="search-form">
 							<input v-model.trim="filter" type="text" class="tt-search__input" placeholder="Filter Tags">
-							<button class="tt-search__btn" type="submit">
+							<button class="tt-search__btn" type="button">
 								<svg class="tt-icon">
 									<use xlink:href="#icon-search"></use>
 								</svg>

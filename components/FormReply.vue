@@ -7,7 +7,7 @@
       </client-only>
       <div class="w3-panel w3-pale-red w3-border w3-round" v-if="errors.body">{{ errors.body[0] }}</div>
       <div class="mt-3 pt-row">
-        <div class="col-auto">
+        <!-- <div class="col-auto">
           <div class="checkbox-group">
             <input type="checkbox" id="checkBox21" name="checkbox" checked="">
             <label for="checkBox21">
@@ -16,9 +16,9 @@
               <span class="tt-text">Subscribe to this topic.</span>
             </label>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-auto">
+        <div class="col-auto pl-0">
           <a @click.prevent="createReply()" href="#" class="btn btn-secondary btn-width-lg">Reply</a>
         </div>
       </div>

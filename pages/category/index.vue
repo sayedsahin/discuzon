@@ -4,10 +4,10 @@
 			<div class="tt-categories-title">
 				<div class="tt-title">Categories</div>
 				<div class="tt-search">
-					<form class="search-wrapper">
+					<form @submit.prevent="" class="search-wrapper">
 						<div class="search-form">
-							<input type="text" class="tt-search__input" placeholder="Search Categories">
-							<button class="tt-search__btn" type="submit">
+							<input v-model.trim="filter" type="text" class="tt-search__input" placeholder="Filter Categories">
+							<button class="tt-search__btn" type="button">
 								<svg class="tt-icon">
 									<use xlink:href="#icon-search"></use>
 								</svg>
@@ -23,7 +23,7 @@
 			</div>
 			<div class="tt-categories-list">
 				<div class="row">
-					<div class="col-md-6 col-lg-4" v-for="(category, index) in categories" :key="index">
+					<div class="col-md-6 col-lg-4" v-for="(category, index) in filterCategories" :key="index">
 						<div class="tt-item">
 							<div class="tt-item-header">
 								<ul class="tt-list-badge">
@@ -72,6 +72,7 @@ export default {
   data () {
     return {
     	loader: '',
+    	filter: '',
     	page: 1,
     }
   },
@@ -83,7 +84,14 @@ export default {
   computed: {
     ...mapGetters ({
       categories: 'category/categories',
-    })
+    }),
+
+    filterCategories() {
+      return this.categories.filter(category => {
+        return category.slug.match(this.filter)
+        // or return category.slug.include(this.filter)
+      })
+    }
   },
 
   methods: {
