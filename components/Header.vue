@@ -16,22 +16,22 @@
               </a>
             </li>
 
-            <li><a href="page-tabs.html"><span>Trending</span></a></li>
+            <li><NuxtLink :to="{name: 'trending'}"><span>Trending</span></NuxtLink></li>
             <li><NuxtLink :to="{name: 'following'}"><span>Following</span></NuxtLink></li>
             <li><NuxtLink :to="{name: 'category'}"><span>Categories</span></NuxtLink></li>
             <li><NuxtLink :to="{name: 'tags'}"><span>Tags</span></NuxtLink></li>
-            <li><a href="#mm1" data-target="#mm1" class="mm-next-level"><span>Pages</span></a>
+            <!-- <li><a href="#mm1" data-target="#mm1" class="mm-next-level"><span>Pages</span></a> -->
 
             </li>
           </ul>
         </div>
-        <div class="mmpanel mmhidden" id="mm1">
+        <!-- <div class="mmpanel mmhidden" id="mm1">
           <ul>
             <li><a href="#" data-target="#" class="mm-prev-level">Back</a></li>
             <li><a href="page-single-user.html" class="mm-original-link"><span>More</span></a></li>
             <li class="active"><a href="index.html">Home</a></li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </nav>
     <header id="tt-header">
@@ -54,7 +54,7 @@
             <div class="tt-desktop-menu">
               <nav>
                 <ul>
-                  <li><a href="page-tabs.html"><span>Trending</span></a></li>
+                  <li><NuxtLink :to="{name: 'trending'}"><span>Trending</span></NuxtLink></li>
                   <li><NuxtLink :to="{name: 'category'}"><span>Categories</span></NuxtLink></li>
                   <li><NuxtLink :to="{name: 'tags'}"><span>Tags</span></NuxtLink></li>
                   <li>
