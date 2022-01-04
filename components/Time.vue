@@ -26,7 +26,8 @@ export default {
 
   computed: {
     fromNow() {
-    	return this.parsed.fromNow()
+    	// return this.parsed.fromNow() //4 days ago
+      return dayjs().from(dayjs(this.parsed), true) //4 days
     }
   },
 
