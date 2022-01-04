@@ -38,7 +38,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="col ml-auto text-right">
-	                            <a href="#" class="tt-underline">Forgot Password</a>
+	                            <NuxtLink to="/forgot" class="tt-underline">Forgot Password</NuxtLink>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">

@@ -46,10 +46,18 @@
           <div class="tt-col-value hide-mobile">1h</div>
         </div>
         <Topics v-for="topic in topics" :key="topic.id" :topic="topic" />
+
+        <div class="tt-row-btn" v-if="more">
+          <button type="button" class="btn-icon js-topiclist-showmore">
+            <svg :class="`tt-icon${loader}`">
+              <use xlink:href="#icon-load_lore_icon"></use>
+            </svg>
+          </button>
+          <div v-observe-visibility="visibilityChange"></div>
+        </div>
       </div>
     </div>
-    <div v-observe-visibility="visibilityChange"></div>
-    <div v-if="loader" class="loader"></div>
+
   </main>
 </template>
 
@@ -58,7 +66,8 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      loader: false
+      loader: '',
+      more: true,
     }
   },
   async asyncData({ store }) {
@@ -75,9 +84,9 @@ export default {
       if (!isVisibale) {
         return;
       }
-      this.loader = true;
+      this.loader = ' animate-flicker';
       await this.$store.dispatch('topic/getMoreTopics');
-      this.loader = false;
+      this.loader = '';
     }
   }
 }

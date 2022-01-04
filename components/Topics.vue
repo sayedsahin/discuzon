@@ -13,7 +13,7 @@
         <NuxtLink :to="{ name: 'topic-id', params: {id: topic.id }}">{{topic.title}}</NuxtLink>
       </h6>
       <div class="row align-items-center no-gutters">
-        <div class="col-11">
+        <div class="col-9">
           <ul class="tt-list-badge">
             <li class="show-mobile"><NuxtLink :to="{ name: 'category-slug', params: { slug: topic.category.slug }}"><span :class="`${topic.category.color} tt-badge`">{{topic.category.name}}</span></NuxtLink></li>
             <li v-for="(tag, index) in topic.tags.slice(0, 2)" :key="index">
@@ -21,7 +21,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-1 ml-auto show-mobile">
+        <div class="col-3 ml-auto show-mobile">
           <div class="tt-value"><Time :timestamp="topic.last_activity ? topic.last_activity.created_at : topic.created_at"/></div>
         </div>
       </div>
