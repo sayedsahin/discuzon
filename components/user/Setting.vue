@@ -35,17 +35,17 @@
 			</div>
 			<div class="form-group">
 				<label for="settingsName">Name</label>
-				<input type="text" name="name" class="form-control" id="settingsName" v-model="name" autocomplete="name">
+				<input type="text" name="name" class="form-control" id="settingsName" v-model="name" autocomplete="name" required>
 				<div class="mt-1 px-2 w3-pale-red w3-border w3-round" v-if="errors.name">{{ errors.name[0] }}</div>
 			</div>
 			<div class="form-group">
 				<label for="settingsUserName">Username</label>
-				<input type="text" name="username" class="form-control" v-model="username" id="settingsUserName" autocomplete="username">
+				<input type="text" name="username" class="form-control" v-model="username" id="settingsUserName" autocomplete="username" required>
 				<div class="mt-1 px-2 w3-pale-red w3-border w3-round" v-if="errors.username">{{ errors.username[0] }}</div>
 			</div>
 			<div class="form-group">
 				<label for="settingsUserEmail">Email</label>
-				<input type="text" name="email" class="form-control" v-model="email" id="settingsUserEmail" autocomplete="email">
+				<input type="text" name="email" class="form-control" v-model="email" id="settingsUserEmail" autocomplete="email" required>
 				<div class="mt-1 px-2 w3-pale-red w3-border w3-round" v-if="errors.email">{{ errors.email[0] }}</div>
 			</div>
 			
@@ -96,17 +96,17 @@
 		<form @submit.prevent="updatePassword()" method="post" class="form-default">
 			<div class="form-group">
 				<label for="oldPassword">Old Password</label>
-				<input type="password" name="current_password" v-model="password.current_password" class="form-control" id="oldPassword" autocomplete="current-password">
+				<input type="password" name="current_password" v-model="password.current_password" class="form-control" id="oldPassword" autocomplete="current-password" required>
 				<div class="mt-1 px-2 w3-pale-red w3-border w3-round" v-if="errors.current_password">{{ errors.current_password }}</div>
 			</div>
 			<div class="form-group">
 				<label for="newPassword">New Password</label>
-				<input type="password" name="password" v-model="password.password" class="form-control" id="newPassword" autocomplete="new-password">
+				<input type="password" name="password" v-model="password.password" class="form-control" id="newPassword" autocomplete="new-password" required>
 				<div class="mt-1 px-2 w3-pale-red w3-border w3-round" v-if="errors.password">{{ errors.password[0] }}</div>
 			</div>
 			<div class="form-group">
 				<label for="confirmPassword">Confirm Password</label>
-				<input type="password" name="password_confirmation" v-model="password.password_confirmation" class="form-control" id="confirmPassword" autocomplete="new-password">
+				<input type="password" name="password_confirmation" v-model="password.password_confirmation" class="form-control" id="confirmPassword" autocomplete="new-password" required>
 				<div class="mt-1 px-2 w3-pale-red w3-border w3-round" v-if="errors.password_confirmation">{{ errors.password_confirmation[0] }}</div>
 			</div>
 

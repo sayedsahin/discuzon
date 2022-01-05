@@ -13,7 +13,7 @@
 					<form @submit.prevent="submit" class="form-default">
 						<div class="form-group">
 							<label for="loginUserName">Email</label>
-							<input v-model.trim="form.email" type="email" name="email" class="form-control" id="loginUserName" placeholder="email@example.com" autocomplete="email">
+							<input v-model.trim="form.email" type="email" name="email" class="form-control" id="loginUserName" placeholder="email@example.com" autocomplete="email" required>
 							<small class="d-block w3-panel w3-pale-red w3-border w3-round" v-if="errors.email">{{ errors.email[0] }}</small>
 						</div>
 						<div class="form-group">

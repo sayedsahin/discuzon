@@ -17,12 +17,12 @@
 						</div>
 						<div class="form-group">
 							<label for="loginUserName">Password</label>
-							<input v-model.trim="form.password" type="password" name="password" class="form-control" placeholder="type a new password" autocomplete="new-password">
+							<input v-model.trim="form.password" type="password" name="password" class="form-control" placeholder="type a new password" autocomplete="new-password" required>
 							<small class="d-block w3-panel w3-pale-red w3-border w3-round" v-if="errors.password">{{ errors.password[0] }}</small>
 						</div>
 						<div class="form-group">
 							<label for="loginUserName">Cofirme Password</label>
-							<input v-model.trim="form.password_confirmation" type="password" name="password_confirmation" class="form-control" placeholder="confirm your password" autocomplete="new-password">
+							<input v-model.trim="form.password_confirmation" type="password" name="password_confirmation" class="form-control" placeholder="confirm your password" autocomplete="new-password" required>
 							<small class="d-block w3-panel w3-pale-red w3-border w3-round" v-if="errors.password_confirmation">{{ errors.password_confirmation[0] }}</small>
 						</div>
 						<div class="form-group">

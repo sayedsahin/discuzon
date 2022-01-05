@@ -78,7 +78,7 @@
               <!-- /toggle -->
               <form @submit.prevent="search()" class="search-wrapper">
                 <div class="search-form">
-                  <input v-model.trim="query" @keyup="liveSearch()" type="text" class="tt-search__input" name="search" placeholder="Search" autocomplete="off">
+                  <input v-model.trim="query" @keyup="liveSearch()" type="text" class="tt-search__input" name="search" placeholder="Search" autocomplete="off" required>
                   <button class="tt-search__btn" type="submit">
                     <svg class="tt-icon">
                       <use xlink:href="#icon-search"></use>

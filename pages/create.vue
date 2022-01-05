@@ -5,14 +5,14 @@
 				<h1 class="tt-title-border">
 					Create New Topic
 				</h1>
-				<form class="form-default form-create-topic">
+				<form @submit.prevent="createTopic()" class="form-default form-create-topic">
 
 					<!-- Title -->
 					<div class="form-group">
 						<label for="inputTopicTitle">Topic Title*</label>
 						<div class="tt-value-wrapper">
 							<div class="mb-1 px-2 d-table w3-pale-red w3-border w3-round" v-if="errors.title">{{ errors.title[0] }}</div>
-							<input v-model="form.title" type="text" name="title" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic" :maxlength="max.title">
+							<input v-model="form.title" type="text" name="title" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic" :maxlength="max.title" required>
 							<span class="tt-value-input" v-text="(max.title - form.title.length)"></span>
 						</div>
 						<div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
@@ -51,7 +51,7 @@
 						<div class="form-group">
 							<label for="inputTopicTitle">Category*</label>
 							<div class="mb-1 px-2 d-table w3-pale-red w3-border w3-round" v-if="errors.category_id">{{ errors.category_id[0] }}</div>
-							<select class="form-control" name="category_id" v-model="form.category_id">
+							<select class="form-control" name="category_id" v-model="form.category_id" required>
 								<option value="">Select</option>
 								<option v-for="category in formData.categories" :key="category.id" :value="category.id">{{category.name}}</option>
 							</select>
@@ -83,7 +83,7 @@
 						<!-- Submit -->
 						<div class="row">
 							<div class="col-auto ml-md-auto">
-								<a @click.prevent="createTopic()" href="" class="btn btn-secondary btn-width-lg">Create Topic</a>
+								<button type="submit" class="btn btn-secondary btn-width-lg">Create Topic</button>
 							</div>
 						</div>
 						<div v-if="errors.message" class="w3-panel w3-pale-red w3-border w3-round">{{errors.message}}</div>

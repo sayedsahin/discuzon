@@ -13,7 +13,7 @@
 							<div class="tt-search">
 								<form @submit.prevent="search()" class="search-wrapper d-block">
 									<div class="search-form">
-										<input v-model.trim="tags_search" type="text" class="tt-search__input" :placeholder="`Search in ${$route.params.name}`">
+										<input v-model.trim="tags_search" type="text" class="tt-search__input" :placeholder="`Search in ${$route.params.name}`" required>
 
 										<button class="tt-search__btn" type="submit">
 											<svg class="tt-icon">

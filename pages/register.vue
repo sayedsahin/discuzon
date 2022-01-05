@@ -17,22 +17,22 @@
 	                	<div v-if="errors.message" class="w3-panel w3-pale-red w3-border w3-round">{{errors.message}}</div>
 	                    <div class="form-group">
 	                        <label for="registerUserName">Name</label>
-	                        <input v-model.trim="form.name" type="text" name="name" class="form-control" id="registerUserName" placeholder="Mr. Sayed">
+	                        <input v-model.trim="form.name" type="text" name="name" class="form-control" id="registerUserName" placeholder="Mr. Sayed" required>
 	                        <small class="w3-red" v-if="errors.name">{{ errors.name[0] }}</small>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="registerUserName">Email</label>
-	                        <input v-model.trim="form.email" type="email" name="email" class="form-control" id="registerUserName" placeholder="email@example.com">
+	                        <input v-model.trim="form.email" type="email" name="email" class="form-control" id="registerUserName" placeholder="email@example.com" required>
 	                        <small class="w3-red" v-if="errors.email">{{ errors.email[0] }}</small>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="registerUserPassword">Password</label>
-	                        <input v-model.trim="form.password" type="password" name="password" class="form-control" id="registerUserPassword" placeholder="************">
+	                        <input v-model.trim="form.password" type="password" name="password" class="form-control" id="registerUserPassword" placeholder="************" required>
 	                        <small class="w3-red" v-if="errors.password">{{ errors.password[0] }}</small>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="registerPasswordConfirm">Confirm Password</label>
-	                        <input v-model.trim="form.password_confirmation" type="password" name="password" class="form-control" id="registerPasswordConfirm" placeholder="************">
+	                        <input v-model.trim="form.password_confirmation" type="password" name="password" class="form-control" id="registerPasswordConfirm" placeholder="************" required>
 	                        <small class="w3-red" v-if="errors.password_confirmation">{{ errors.password_confirmation[0] }}</small>
 	                    </div>
 	                    <div class="form-group">
