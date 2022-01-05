@@ -1,5 +1,5 @@
 <template>
-  <div class="tt-item">
+  <div :class="`tt-item ${select}`">
     <div class="tt-col-avatar">
       <!-- <svg class="tt-icon">
         <use xlink:href="#icon-ava-c"></use>
@@ -10,6 +10,9 @@
     </div>
     <div class="tt-col-description">
       <h6 class="tt-title">
+        <svg class="tt-icon" v-if="select">
+          <use xlink:href="#icon-pinned"></use>
+        </svg>
         <NuxtLink :to="{ name: 'topic-id', params: {id: topic.id }}">{{topic.title}}</NuxtLink>
       </h6>
       <div class="row align-items-center no-gutters">
@@ -39,6 +42,11 @@ export default{
     topic: {
       type: Object,
       required: true
+    },
+    select: {
+      type: String,
+      required: true,
+      default: null
     }
   },
   computed: {

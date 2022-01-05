@@ -11,40 +11,10 @@
           <div class="tt-col-value">Activity</div>
         </div>
         <div class="tt-topic-alert tt-alert-default" role="alert">
-          <a href="#" target="_blank">4 new posts</a> are added recently, click here to load them.
+          <!-- <a href="#" target="_blank">4 new posts</a> are added recently, click here to load them. -->
         </div>
-        <div class="tt-item tt-itemselect">
-          <div class="tt-col-avatar">
-            <svg class="tt-icon">
-              <use xlink:href="#icon-ava-k"></use>
-            </svg>
-          </div>
-          <div class="tt-col-description">
-            <h6 class="tt-title"><a href="page-single-topic.html">
-              <svg class="tt-icon">
-                <use xlink:href="#icon-pinned"></use>
-              </svg>
-              Eid Costume Contest 2018
-            </a></h6>
-            <div class="row align-items-center no-gutters">
-              <div class="col-11">
-                <ul class="tt-list-badge">
-                  <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">politics</span></a></li>
-                  <li><a href="#"><span class="tt-badge">contests</span></a></li>
-                  <li><a href="#"><span class="tt-badge">authors</span></a></li>
-                </ul>
-              </div>
-              <div class="col-1 ml-auto show-mobile">
-                <div class="tt-value">1h</div>
-              </div>
-            </div>
-          </div>
-          <div class="tt-col-category"><span class="tt-color01 tt-badge">politics</span></div>
-          <div class="tt-col-value hide-mobile">985</div>
-          <div class="tt-col-value tt-color-select hide-mobile">502</div>
-          <div class="tt-col-value hide-mobile">15.1k</div>
-          <div class="tt-col-value hide-mobile">1h</div>
-        </div>
+
+        <Topics v-for="(topic, index) in pinTopics" :key="index" :topic="topic" :select="'tt-itemselect'" />
         <Topics v-for="topic in topics" :key="topic.id" :topic="topic" />
 
         <div class="tt-row-btn" v-if="more">
@@ -72,10 +42,12 @@ export default {
   },
   async asyncData({ store }) {
     await store.dispatch('topic/getTopics');
+    await store.dispatch('topic/getPinTopics');
   },
   computed: {
     ...mapGetters ({
       topics: 'topic/topics',
+      pinTopics: 'topic/pinTopics',
     })
   },
 

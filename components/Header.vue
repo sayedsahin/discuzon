@@ -90,7 +90,7 @@
                     </svg>
                   </button>
                 </div>
-                <div class="search-results" v-if="showResult">
+                <div class="search-results" v-if="showResult" style="width:unset;">
                   <div class="tt-search-scroll scroll" v-if="liveSearches.length !== 0">
                     <ul>
                       <li v-for="(search, index) in liveSearches" :key="index">

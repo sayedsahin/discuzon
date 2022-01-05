@@ -3,6 +3,7 @@ export default {
 	state() {
 		return {
 			topics: [],
+			pin_topics: [],
 			current_page: 1,
 			topic: [],
 			replies: [],
@@ -14,6 +15,10 @@ export default {
 
 		topics(state){
 			return state.topics;
+		},
+
+		pinTopics(state){
+			return state.pin_topics;
 		},
 
 		topic(state){
@@ -36,6 +41,10 @@ export default {
 
 		APPEND_TOPICS (state, topics){
 			state.topics = [...state.topics, ...topics];
+		},
+
+		SET_PIN_TOPICS (state, topics){
+			state.pin_topics = topics;
 		},
 
 		CURRENT_PAGE (state, current_page){
@@ -76,6 +85,11 @@ export default {
 		    let {data, meta} = await this.$axios.$get(`/topic?page=${state.current_page+1}`);
 	        commit('APPEND_TOPICS', data);
 	        commit('CURRENT_PAGE', meta.current_page);
+		},
+
+		async getPinTopics({ commit }) {
+		    let { data } = await this.$axios.$get('/pins/topics');
+	        commit('SET_PIN_TOPICS', data);
 		},
 
 		async getTopic({ commit }, id) {
