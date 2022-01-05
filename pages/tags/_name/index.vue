@@ -2,17 +2,17 @@
 	<main id="tt-pageContent">
 		<div class="container">
 			<div class="tt-catSingle-title">
-				<div class="tt-innerwrapper tt-row">
+				<div class="d-block d-sm-flex tt-innerwrapper tt-row">
 					<div class="tt-col-left">
 						<ul class="tt-list-badge">
 							<li><NuxtLink :to="{ name: 'tags-name', params: { slug: $route.params.name }}"><span class="tt-badge">{{ $route.params.name }}</span></NuxtLink></li>
 						</ul>
 					</div>
 					<div class="ml-left tt-col-right">
-						<div class="tt-col-item">
+						<div class="d-block d-sm-inline-block tt-col-item">
 							<h2 class="tt-value">Topics - {{ tag.topics_count }}</h2>
 						</div>
-						<div class="tt-col-item">
+						<div class="d-block d-sm-inline-block tt-col-item">
 							<div class="tt-search">
 								<form @submit.prevent="search()" class="search-wrapper d-block">
 									<div class="search-form">

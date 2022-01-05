@@ -2,16 +2,16 @@
 	<main id="tt-pageContent">
 		<div class="container">
 			<div class="tt-catSingle-title">
-				<div class="tt-innerwrapper tt-row">
+				<div class="d-block d-sm-flex tt-innerwrapper tt-row">
 					<div class="tt-col-left">
 						<ul class="tt-list-badge">
 							<li><NuxtLink :to="{ name: 'category-slug', params: { slug: $route.params.slug }}"><span class="tt-color01 tt-badge">{{ $route.params.slug }}</span></NuxtLink></li>
 						</ul>
 					</div>
 					<div class="ml-left tt-col-right">
-						<div class="tt-col-item">
+						<div class="d-block d-sm-inline-block tt-col-item">
 							<div class="tt-search">
-								<form @submit.prevent="search()" class="search-wrapper">
+								<form @submit.prevent="search()" class="d-block search-wrapper">
 									<div class="search-form">
 										<input v-model.trim="category_search" type="text" class="tt-search__input" :placeholder="`Search in ${$route.params.slug}`">
 

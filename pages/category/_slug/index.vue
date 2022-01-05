@@ -2,7 +2,7 @@
 	<main id="tt-pageContent">
 		<div class="container">
 			<div class="tt-catSingle-title">
-				<div class="tt-innerwrapper tt-row">
+				<div class="d-block d-sm-flex tt-innerwrapper tt-row">
 					<div class="tt-col-left">
 						<ul class="tt-list-badge">
 							<li><span class="tt-color01 tt-badge">{{ category.name }}</span></li>
@@ -17,9 +17,9 @@
 								<i class="tt-icon"><svg :class="category.reacted ? 'active-fill' : ''"><use xlink:href="#icon-favorite"></use></svg></i>
 							</a>
 						</div>
-						<div class="tt-col-item">
+						<div class="d-block d-sm-inline-block tt-col-item">
 							<div class="tt-search">
-								<form @submit.prevent="search()" class="search-wrapper">
+								<form @submit.prevent="search()" class="d-block search-wrapper">
 									<div class="search-form">
 										<input v-model.trim="category_search" type="text" class="tt-search__input" :placeholder="`Search in ${category.name}`">
 										<button class="tt-search__btn" type="submit">
