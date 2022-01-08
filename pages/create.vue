@@ -114,6 +114,13 @@ export default {
     	tag: '',
     }
   },
+
+  head() {
+    return{
+      title: 'Create a topic'
+    }
+  },
+
   computed: {
     async getFormData () {
       let data = await this.$axios.$get(`/topic/create`);

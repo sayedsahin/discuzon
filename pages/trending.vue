@@ -37,6 +37,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: 'Tending Topics'
+    }
+  },
+
   async asyncData({ $axios, params }) { 
     let { data } = await $axios.$get(`/trends`);
     return { topics: data };

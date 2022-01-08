@@ -107,6 +107,13 @@ export default {
     	success: false
     }
   },
+
+  head() {
+    return{
+      title: this.topic.title+' - edit'
+    }
+  },
+
   async asyncData ({$axios, params}) {
   	let {data} = await $axios.$get(`/topic/${params.id}/edit`);
   	let formData = await $axios.$get(`/topic/create`);

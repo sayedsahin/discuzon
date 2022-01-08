@@ -89,6 +89,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: this.profileUser.name+' - profile'
+    }
+  },
+
   async asyncData({ store, params }) {
   	await store.dispatch('profile/getUser', params.id);
   },

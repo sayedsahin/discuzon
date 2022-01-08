@@ -130,6 +130,13 @@ export default {
       loader: true,
     }
   },
+
+  head() {
+    return{
+      title: this.topic.title
+    }
+  },
+  
   async asyncData({$axios, params}){
     const {data} = await $axios.$get(`/topic/${params.id}`)
     return {

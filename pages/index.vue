@@ -40,6 +40,12 @@ export default {
       more: true,
     }
   },
+  head() {
+    return{
+      title: 'Welcome to forum'
+    }
+  },
+
   async asyncData({ store }) {
     await store.dispatch('topic/getTopics');
     await store.dispatch('topic/getPinTopics');

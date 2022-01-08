@@ -37,6 +37,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: 'My Following Topics'
+    }
+  },
+
   async asyncData({ $axios, params }) { 
     let { data } = await $axios.$get(`/following`);
     return { topics: data };

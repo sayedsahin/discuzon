@@ -47,7 +47,8 @@ export default{
 	},
   data () {
     return {
-      spin:false
+      spin:false,
+      title: this.topic.title
     };
   },
 

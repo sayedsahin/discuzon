@@ -38,6 +38,11 @@
 				reset_message: '',
 			}
 		},
+		head() {
+	    return{
+	      title: 'Forgot Password'
+	    }
+	  },
 		methods: {
 			async submit() {
 				try{

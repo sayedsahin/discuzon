@@ -77,6 +77,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: 'Categories'
+    }
+  },
+
   async asyncData({ store, params }) { 
     await store.dispatch('category/getCategories', params.slug);
   },

@@ -74,6 +74,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: this.tag.name+' tag - topics'
+    }
+  },
+
   async asyncData({ $axios, params }) { 
     let { data } = await $axios.$get(`/tags/${params.name}`);
     return { tag: data };

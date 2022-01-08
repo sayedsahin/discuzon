@@ -68,6 +68,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: this.$route.params.slug+' category - search'
+    }
+  },
+
   async asyncData({ $axios, params }) { 
   	try{
 	    let { data } = await $axios.$get(`category/${params.slug}/search?query=${params.query}`);

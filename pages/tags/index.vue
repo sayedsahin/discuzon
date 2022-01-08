@@ -62,6 +62,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: 'Tags'
+    }
+  },
+
   async asyncData({ $axios }) { 
   	// must be used axios directly withot vuex
     let { data } = await $axios.$get('/tags');

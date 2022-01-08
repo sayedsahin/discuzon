@@ -112,6 +112,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: this.category.name+' category - topics'
+    }
+  },
+
   async asyncData({ store, params }) { 
     await store.dispatch('category/getCategory', params.slug);
   },

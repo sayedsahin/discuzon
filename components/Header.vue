@@ -204,8 +204,12 @@ export default {
       if (!this.authenticated) {
         return
       }
-      let data = await this.$axios.$get(`/notifications/count`);
-      this.notifications_count = data
+      try{
+        let data = await this.$axios.$get(`/notifications/count`);
+        this.notifications_count = data
+      }catch(e){
+        return
+      }
     },
   },
 
@@ -282,8 +286,12 @@ export default {
         return
       }
       // return
-      let data = await this.$axios.$get(`/notifications/count`);
-      this.notifications_count = data
+      try{
+        let data = await this.$axios.$get(`/notifications/count`);
+        this.notifications_count = data
+      }catch(e){
+        return
+      }
     }
   }
 }

@@ -94,6 +94,13 @@ export default {
 			}
 		}
 	},
+
+	head() {
+    return{
+      title: 'User Login'
+    }
+  },
+
 	methods: {
 		async submit() {
 			try{

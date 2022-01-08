@@ -92,6 +92,12 @@ export default {
     }
   },
 
+  head() {
+    return{
+      title: 'Search - '+this.$route.params.query
+    }
+  },
+
   async asyncData({store, params}) {
   	await store.dispatch('search/getSearch', params.query);
   },

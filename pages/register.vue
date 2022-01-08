@@ -89,6 +89,13 @@ export default {
 			}
 		}
 	},
+
+	head() {
+    return{
+      title: 'User Registration'
+    }
+  },
+
 	methods: {
 		async submit() {
 			try{
