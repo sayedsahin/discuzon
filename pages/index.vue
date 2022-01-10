@@ -42,7 +42,7 @@ export default {
   },
   head() {
     return{
-      title: 'Welcome to forum'
+      title: 'Welcome to DiscussOn'
     }
   },
 

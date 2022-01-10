@@ -38,7 +38,7 @@
 					</ul>
 				</div> -->
 			</div>
-			<div class="tt-topic-list">
+			<div class="tt-topic-list" v-if="category.topics.length !== 0">
 				<div class="tt-list-header">
 					<div class="tt-col-topic">Topic</div>
 					<div class="tt-col-category">Category</div>
@@ -58,6 +58,7 @@
 					<div v-observe-visibility="visibilityChange"></div>
 				</div>
 			</div>
+			<NotFound :error="'Tag Topics Not Found'" v-else />
 		</div>
 	</main>
 </template>

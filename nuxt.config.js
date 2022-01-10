@@ -56,7 +56,7 @@ export default {
   ],
   axios: {
     credentials: true,
-    baseURL: 'http://nuxt.test/api'
+    baseURL: 'https://sayeeds.herokuapp.com/api'
   },
   auth: {
     /*strategies: {

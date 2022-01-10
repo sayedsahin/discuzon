@@ -16,10 +16,10 @@
               </a>
             </li>
 
-            <li><NuxtLink :to="{name: 'trending'}"><span>Trending</span></NuxtLink></li>
-            <li><NuxtLink :to="{name: 'following'}"><span>Following</span></NuxtLink></li>
-            <li><NuxtLink :to="{name: 'category'}"><span>Categories</span></NuxtLink></li>
-            <li><NuxtLink :to="{name: 'tags'}"><span>Tags</span></NuxtLink></li>
+            <li @click="nav_open = !nav_open"><NuxtLink :to="{name: 'trending'}"><span>Trending</span></NuxtLink></li>
+            <li @click="nav_open = !nav_open"><NuxtLink :to="{name: 'following'}"><span>Following</span></NuxtLink></li>
+            <li @click="nav_open = !nav_open"><NuxtLink :to="{name: 'category'}"><span>Categories</span></NuxtLink></li>
+            <li @click="nav_open = !nav_open"><NuxtLink :to="{name: 'tags'}"><span>Tags</span></NuxtLink></li>
             <!-- <li><a href="#mm1" data-target="#mm1" class="mm-next-level"><span>Pages</span></a> -->
 
             </li>
@@ -47,7 +47,9 @@
             <!-- /toggle mobile menu -->
             <!-- logo -->
             <div class="tt-logo">
-              <NuxtLink to="/"><img src="/favicon.ico" alt=""></NuxtLink>
+              <NuxtLink to="/">
+                <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M416 224V64c0-35.3-28.7-64-64-64H64C28.7 0 0 28.7 0 64v160c0 35.3 28.7 64 64 64v54.2c0 8 9.1 12.6 15.5 7.8l82.8-62.1H352c35.3.1 64-28.6 64-63.9zm96-64h-64v64c0 52.9-43.1 96-96 96H192v64c0 35.3 28.7 64 64 64h125.7l82.8 62.1c6.4 4.8 15.5.2 15.5-7.8V448h32c35.3 0 64-28.7 64-64V224c0-35.3-28.7-64-64-64z"/></svg>
+              </NuxtLink>
             </div>
             <!-- /logo -->
             <!-- desctop menu -->
@@ -210,7 +212,7 @@ export default {
       }catch(e){
         return
       }
-    },
+    }
   },
 
   methods: {
@@ -298,5 +300,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
+.logo{width: 30px; fill: #9e9e9e;}
 </style>

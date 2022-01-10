@@ -6,7 +6,7 @@
 	                <NuxtLink to="/" class="tt-block-title">
 	                    <img src="/favicon.ico" width="80px">
 	                    <div class="tt-title">
-	                        Welcome to Forum19
+	                        Welcome to DiscussOn
 	                    </div>
 	                    <div class="tt-description">
 	                       Log into your account to unlock true power of community.
@@ -44,8 +44,8 @@
 	                    <div class="form-group">
 	                        <button type="submit" class="btn btn-secondary btn-block">Log in</button>
 	                    </div>
-	                    <p>Or login with social network</p>
-	                    <div class="row">
+	                    <!-- <p>Or login with social network</p> -->
+	                    <!-- <div class="row">
 	                        <div class="col">
 	                            <div class="form-group">
 	                                <a href="#" class="btn btn-color01 btn-secondary btn-block">
@@ -70,11 +70,11 @@
 	                                </a>
 	                            </div>
 	                        </div>
-	                    </div>
+	                    </div> -->
 	                    <p>Don’t have an account? <NuxtLink to="/register" class="tt-underline">Signup here</NuxtLink></p>
 	                    <div class="tt-notes">
 	                        By Logging in, signing in or continuing, I agree to
-	                        Forum19’s <a href="#" class="tt-underline">Terms of Use</a> and <a href="#" class="tt-underline">Privacy Policy.</a>
+	                        DiscussOn’s <a href="#" class="tt-underline">Terms of Use</a> and <a href="#" class="tt-underline">Privacy Policy.</a>
 	                    </div>
 	                </form>
 	            </div>

@@ -29,7 +29,6 @@
 					<div class="tt-col-value-large hide-mobile col-lg-1">Category</div>
 					<div class="tt-col-value-large hide-mobile col-lg-2 w3-right-align">Created</div>
 				</div>
-
 				<div class="tt-item" v-for="(search, index) in searches" :key="index">
 					<div class="tt-col-avatar col-lg-1">
 						<NuxtLink :to="{ name: 'user-id', params: {id: search.user_id} }">
@@ -73,7 +72,7 @@
 					</button>
 					<div v-observe-visibility="visibilityChange"></div>
 				</div>
-				<div v-else>"{{$route.params.query}}" Result Not Found, Try another word</div>
+				<NotFound v-else :error="`'${$route.params.query}' Result Not Found, Try another word`" />
 
 			</div>
 		</div>

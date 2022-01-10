@@ -1,7 +1,7 @@
 <template>
 	<main id="tt-pageContent" class="tt-offset-small">
     <div class="container">
-      <div class="tt-topic-list">
+      <div class="tt-topic-list" v-if="topics.length !== 0">
         <div class="tt-list-header">
           <div class="tt-col-topic">Topic</div>
           <div class="tt-col-category">Category</div>
@@ -22,6 +22,7 @@
 				</div>
 
       </div>
+      <NotFound :error="'Follows Topic Not Found'" v-else />
     </div>
   </main>
 </template>

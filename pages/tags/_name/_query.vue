@@ -42,7 +42,8 @@
 				</div>
 
 				<Topics v-if="search_result.length !== 0" v-for="topic in search_result" :key="topic.id" :topic="topic" />
-				<div class="col-12" v-if="search_result.length === 0 && !errors.query">"{{ tags_search }}" not found! Try another word</div>
+				<NotFound :error="'Try Another Word'" v-if="search_result.length === 0 && !errors.query" />
+				
 				<div class="ml-4 px-2 d-table w3-pale-red w3-border w3-round" v-if="errors.query">{{ errors.query[0] }}</div>
 				<div v-if="search_result.length > 9" class="tt-row-btn">
 					<button type="button" class="btn-icon js-topiclist-showmore">
