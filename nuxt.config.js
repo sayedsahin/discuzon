@@ -1,7 +1,8 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: 'server',
   // ssr: false,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-front',
@@ -57,6 +58,7 @@ export default {
   axios: {
     credentials: true,
     baseURL: 'https://sayeeds.herokuapp.com/api'
+    // baseURL: 'http://nuxt.test/api'
   },
   auth: {
     /*strategies: {
