@@ -5,7 +5,9 @@
 	        <div class="tt-loginpages-wrapper">
 	            <div class="tt-loginpages">
 	                <NuxtLink to="/" class="tt-block-title">
-	                    <img src="/favicon.ico" width="80px">
+	                    <svg class="logo-lg">
+											  <use xlink:href="#logo"></use>
+											</svg>
 	                    <div class="tt-title">
 	                        Welcome to DiscussOn
 	                    </div>
