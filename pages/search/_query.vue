@@ -7,7 +7,7 @@
 					<div class="tt-search" style="width: unset;">
 						<form @submit.prevent="search()" class="search-wrapper d-flex">
 							<div class="search-form">
-								<input v-model.trim="query" type="text" class="tt-search__input" placeholder="Search" required>
+								<input v-model.trim="query" type="text" class="tt-search__input" placeholder="Search Categories" required>
 								<button class="tt-search__btn" type="submit">
 									<svg class="tt-icon">
 										<use xlink:href="#icon-search"></use>
