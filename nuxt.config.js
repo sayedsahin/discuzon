@@ -16,7 +16,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/images/logo.png' },
       { rel: 'stylesheet', href: '/css/w3.css' },
       { rel: 'stylesheet', href: '/css/style.css' },
     ],
@@ -57,14 +57,14 @@ export default {
   ],
   axios: {
     credentials: true,
-    baseURL: 'https://sayeeds.herokuapp.com/api'
-    // baseURL: 'http://nuxt.test/api'
+    // baseURL: 'https://sayeeds.herokuapp.com/api'
+    baseURL: 'http://discuzon-api.test/api'
   },
   auth: {
     /*strategies: {
       'laravelSanctum': {
         provider: 'laravel/sanctum',
-        url: 'http://nuxt.test',
+        url: 'http://discuzon-api.test',
         endpoints: {
           login: { url: '/api/login', method: 'post'},
           user: { url: '/api/user', method: 'get'},
