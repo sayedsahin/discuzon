@@ -57,8 +57,8 @@ export default {
   ],
   axios: {
     credentials: true,
-    // baseURL: 'https://sayeeds.herokuapp.com/api'
-    baseURL: 'http://discuzon-api.test/api'
+    baseURL: 'https://discuzon.sayed.top/api'
+    // baseURL: 'http://discuzon-api.test/api'
   },
   auth: {
     /*strategies: {
